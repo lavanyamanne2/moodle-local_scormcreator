@@ -1,0 +1,12 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44.2 43.1">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="24.45" x2="43.7" y2="24.45" gradientTransform="matrix(1, 0, 0, -1, 0, 46)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c7c7c7"/>
+      <stop offset="1" stop-color="#f7f7f7"/>
+    </linearGradient>
+  </defs>
+  <title>buttonbg_rewind</title>
+  <rect x="0.5" y="0.5" width="43.2" height="42.1" rx="4.1" ry="4.1" stroke="#777" stroke-miterlimit="10" fill="url(#linear-gradient)"/>
+  <path d="M19.4,10.57l-11.15,11,11.15,11Z"/>
+  <path d="M31.94,10.57l-11.16,11,11.16,11Z"/>
+</svg>

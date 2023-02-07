@@ -1,0 +1,232 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- SCORM 1.2.
+
+This file is part of @2022 SCORM-CREATOR plugin
+
+-->
+
+<manifest identifier="com.scorm1.2.lms.runtime.15" version="1"
+         xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+         xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                             http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                             http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+<metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+</metadata>
+
+<organizations default="lms_training_center">
+    <organization identifier="lms_online_training">
+        <title>Series Title</title>
+        <item identifier="lms_training_coursework" identifierref="resource_16_06"><title>Session Title</title></item>
+    </organization>
+</organizations>
+
+<resources>
+    <resource identifier="resource_16_06" type="webcontent" adlcp:scormtype="sco" href="launch.htm">
+        <file href = "data/button-icons/black/captions.png"/>
+        <file href = "data/button-icons/black/chapters.png"/>
+        <file href = "data/button-icons/black/close.png"/>
+        <file href = "data/button-icons/black/descriptions.png"/>
+        <file href = "data/button-icons/black/ellipsis.png"/>
+        <file href = "data/button-icons/black/faster.png"/>
+        <file href = "data/button-icons/black/forward.png"/>
+        <file href = "data/button-icons/black/fullscreen-collapse.png"/>
+        <file href = "data/button-icons/black/fullscreen-expand.png"/>
+        <file href = "data/button-icons/black/help.png"/>
+        <file href = "data/button-icons/black/next.png"/>
+        <file href = "data/button-icons/black/pause.png"/>
+        <file href = "data/button-icons/black/pipe.png"/>
+        <file href = "data/button-icons/black/play.png"/>
+        <file href = "data/button-icons/black/preferences.png"/>
+        <file href = "data/button-icons/black/previous.png"/>
+        <file href = "data/button-icons/black/rabbit.png"/>
+        <file href = "data/button-icons/black/restart.png"/>
+        <file href = "data/button-icons/black/rewind.png"/>
+        <file href = "data/button-icons/black/sign.png"/>
+        <file href = "data/button-icons/black/slower.png"/>
+        <file href = "data/button-icons/black/stop.png"/>
+        <file href = "data/button-icons/black/transcript.png"/>
+        <file href = "data/button-icons/black/turtle.png"/>
+        <file href = "data/button-icons/black/volume-loud.png"/>
+        <file href = "data/button-icons/black/volume-medium.png"/>
+        <file href = "data/button-icons/black/volume-mute.png"/>
+        <file href = "data/button-icons/black/volume-soft.png"/>
+        <file href = "data/button-icons/fonts/able.eot"/>
+        <file href = "data/button-icons/fonts/able.svg"/>
+        <file href = "data/button-icons/fonts/able.ttf"/>
+        <file href = "data/button-icons/fonts/able.woff"/>
+        <file href = "data/button-icons/white/captions.png"/>
+        <file href = "data/button-icons/white/chapters.png"/>
+        <file href = "data/button-icons/white/close.png"/>
+        <file href = "data/button-icons/white/descriptions.png"/>
+        <file href = "data/button-icons/white/ellipsis.png"/>
+        <file href = "data/button-icons/white/faster.png"/>
+        <file href = "data/button-icons/white/forward.png"/>
+        <file href = "data/button-icons/white/fullscreen-collapse.png"/>
+        <file href = "data/button-icons/white/fullscreen-expand.png"/>
+        <file href = "data/button-icons/white/help.png"/>
+        <file href = "data/button-icons/white/next.png"/>
+        <file href = "data/button-icons/white/pause.png"/>
+        <file href = "data/button-icons/white/pipe.png"/>
+        <file href = "data/button-icons/white/play.png"/>
+        <file href = "data/button-icons/white/preferences.png"/>
+        <file href = "data/button-icons/white/previous.png"/>
+        <file href = "data/button-icons/white/rabbit.png"/>
+        <file href = "data/button-icons/white/restart.png"/>
+        <file href = "data/button-icons/white/rewind.png"/>
+        <file href = "data/button-icons/white/sign.png"/>
+        <file href = "data/button-icons/white/slower.png"/>
+        <file href = "data/button-icons/white/stop.png"/>
+        <file href = "data/button-icons/white/transcript.png"/>
+        <file href = "data/button-icons/white/turtle.png"/>
+        <file href = "data/button-icons/white/volume-loud.png"/>
+        <file href = "data/button-icons/white/volume-medium.png"/>
+        <file href = "data/button-icons/white/volume-mute.png"/>
+        <file href = "data/button-icons/white/volume-soft.png"/>
+        <file href = "data/button-icons/able-icons.svg"/>
+        <file href = "data/img/button-icons/black/captions.png"/>
+        <file href = "data/img/button-icons/black/chapters.png"/>
+        <file href = "data/img/button-icons/black/close.png"/>
+        <file href = "data/img/button-icons/black/descriptions.png"/>
+        <file href = "data/img/button-icons/black/ellipsis.png"/>
+        <file href = "data/img/button-icons/black/faster.png"/>
+        <file href = "data/img/button-icons/black/forward.png"/>
+        <file href = "data/img/button-icons/black/fullscreen-collapse.png"/>
+        <file href = "data/img/button-icons/black/fullscreen-expand.png"/>
+        <file href = "data/img/button-icons/black/help.png"/>
+        <file href = "data/img/button-icons/black/next.png"/>
+        <file href = "data/img/button-icons/black/pause.png"/>
+        <file href = "data/img/button-icons/black/pipe.png"/>
+        <file href = "data/img/button-icons/black/play.png"/>
+        <file href = "data/img/button-icons/black/preferences.png"/>
+        <file href = "data/img/button-icons/black/previous.png"/>
+        <file href = "data/img/button-icons/black/rabbit.png"/>
+        <file href = "data/img/button-icons/black/restart.png"/>
+        <file href = "data/img/button-icons/black/rewind.png"/>
+        <file href = "data/img/button-icons/black/sign.png"/>
+        <file href = "data/img/button-icons/black/slower.png"/>
+        <file href = "data/img/button-icons/black/stop.png"/>
+        <file href = "data/img/button-icons/black/transcript.png"/>
+        <file href = "data/img/button-icons/black/turtle.png"/>
+        <file href = "data/img/button-icons/black/volume-loud.png"/>
+        <file href = "data/img/button-icons/black/volume-medium.png"/>
+        <file href = "data/img/button-icons/black/volume-mute.png"/>
+        <file href = "data/img/button-icons/black/volume-soft.png"/>
+        <file href = "data/img/button-icons/fonts/able.eot"/>
+        <file href = "data/img/button-icons/fonts/able.svg"/>
+        <file href = "data/img/button-icons/fonts/able.ttf"/>
+        <file href = "data/img/button-icons/fonts/able.woff"/>
+        <file href = "data/img/button-icons/white/captions.png"/>
+        <file href = "data/img/button-icons/white/chapters.png"/>
+        <file href = "data/img/button-icons/white/close.png"/>
+        <file href = "data/img/button-icons/white/descriptions.png"/>
+        <file href = "data/img/button-icons/white/ellipsis.png"/>
+        <file href = "data/img/button-icons/white/faster.png"/>
+        <file href = "data/img/button-icons/white/forward.png"/>
+        <file href = "data/img/button-icons/white/fullscreen-collapse.png"/>
+        <file href = "data/img/button-icons/white/fullscreen-expand.png"/>
+        <file href = "data/img/button-icons/white/help.png"/>
+        <file href = "data/img/button-icons/white/next.png"/>
+        <file href = "data/img/button-icons/white/pause.png"/>
+        <file href = "data/img/button-icons/white/pipe.png"/>
+        <file href = "data/img/button-icons/white/play.png"/>
+        <file href = "data/img/button-icons/white/preferences.png"/>
+        <file href = "data/img/button-icons/white/previous.png"/>
+        <file href = "data/img/button-icons/white/rabbit.png"/>
+        <file href = "data/img/button-icons/white/restart.png"/>
+        <file href = "data/img/button-icons/white/rewind.png"/>
+        <file href = "data/img/button-icons/white/sign.png"/>
+        <file href = "data/img/button-icons/white/slower.png"/>
+        <file href = "data/img/button-icons/white/stop.png"/>
+        <file href = "data/img/button-icons/white/transcript.png"/>
+        <file href = "data/img/button-icons/white/turtle.png"/>
+        <file href = "data/img/button-icons/white/volume-loud.png"/>
+        <file href = "data/img/button-icons/white/volume-medium.png"/>
+        <file href = "data/img/button-icons/white/volume-mute.png"/>
+        <file href = "data/img/button-icons/white/volume-soft.png"/>
+        <file href = "data/img/button-icons/able-icons.svg"/>
+        <file href = "data/img/BACK.png"/>
+        <file href = "data/img/BACK.svg"/>
+        <file href = "data/img/BACK2.png"/>
+        <file href = "data/img/BACKb.svg"/>
+        <file href = "data/img/bgquiz.png"/>
+        <file href = "data/img/buttonbg.svg"/>
+        <file href = "data/img/EXER.svg"/>
+        <file href = "data/img/EXERb.svg"/>
+        <file href = "data/img/EXIT.svg"/>
+        <file href = "data/img/EXITb.svg"/>
+        <file href = "data/img/help.png"/>
+        <file href = "data/img/HELP.svg"/>
+        <file href = "data/img/HELPb.svg"/>
+        <file href = "data/img/lms_bg.png"/>
+        <file href = "data/img/imfusion.png"/>
+        <file href = "data/img/mute.png"/>
+        <file href = "data/img/mute.svg"/>
+        <file href = "data/img/muteb.png"/>
+        <file href = "data/img/muted.png"/>
+        <file href = "data/img/muted.svg"/>
+        <file href = "data/img/mutedb.png"/>
+        <file href = "data/img/NEXT.png"/>
+        <file href = "data/img/NEXT.svg"/>
+        <file href = "data/img/NEXT2.png"/>
+        <file href = "data/img/NEXTb.svg"/>
+        <file href = "data/img/pause.svg"/>
+        <file href = "data/img/play.svg"/>
+        <file href = "data/img/rewind.svg"/>
+        <file href = "data/img/spacer.png"/>
+        <file href = "data/img/spacer.svg"/>
+        <file href = "data/img/t.png"/>
+        <file href = "data/img/f.png"/>
+        <file href = "data/img/timebar.svg"/>
+        <file href = "data/img/TRANSCRIPT.svg"/>
+        <file href = "data/scripts/AC_ActiveX.js"/>
+        <file href = "data/scripts/AC_RunActiveContent.js"/>
+        <file href = "data/scripts/ca.js"/>
+        <file href = "data/scripts/de.js"/>
+        <file href = "data/scripts/en.js"/>
+        <file href = "data/scripts/es.js"/>
+        <file href = "data/scripts/fr.js"/>
+        <file href = "data/scripts/it.js"/>
+        <file href = "data/scripts/ja.js"/>
+        <file href = "data/scripts/jqueryv3.2.1.js"/>
+        <file href = "data/scripts/js.cookie.js"/>
+        <file href = "data/scripts/modernizr.custom.js"/>
+        <file href = "data/scripts/nb.js"/>
+        <file href = "data/scripts/nl.js"/>
+        <file href = "data/scripts/player.js"/>
+        <file href = "data/scripts/SCO.js"/>
+        <file href = "data/scripts/SCOAPIWrapper.js"/>
+        <file href = "data/scripts/videoplayer.css"/>
+        <file href = "data/scripts/videoplayer.js"/>
+        <file href = "data/scripts/AutoBookmark.js"/>
+        <file href = "data/scripts/AutoCompleteSCO.js"/>
+        <file href = "data/scripts/scormdriver.js"/>
+        <file href = "data/scripts/jqueryv3.2.1.js"/>
+        <file href = "data/scripts/quiz.js"/>
+        <file href = "data/translations/ca.js"/>
+        <file href = "data/translations/de.js"/>
+        <file href = "data/translations/en.js"/>
+        <file href = "data/translations/es.js"/>
+        <file href = "data/translations/fr.js"/>
+        <file href = "data/translations/it.js"/>
+        <file href = "data/translations/ja.js"/>
+        <file href = "data/translations/nb.js"/>
+        <file href = "data/translations/nl.js"/>
+        <file href = "data/page1.html"/>
+        <file href = "data/shell1.html"/>
+        <file href = "data/shell2.html"/>
+        <file href = "data/shell3.html"/>
+        <file href = "data/shell4.html"/>
+        <file href = "data/shell5.html"/>
+        <file href = "data/quiz.html"/>
+        <file href = "data/help.html"/>
+        <file href = "data/questions.js"/>
+        <file href = "scripts/launchpage.html"/>
+        <file href = "scripts/scormfunctions.js"/>
+        <file href = "launch.htm"/>
+    </resource>
+</resources>
+</manifest>

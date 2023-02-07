@@ -1,0 +1,11 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 106.06 31.46" >
+  <defs>
+    <linearGradient id="linear-gradient" x1="57.03" y1="40.01" x2="57.03" y2="9.55" gradientTransform="matrix(1, 0, 0, -1, -4, 40.51)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c2c4c6"/>
+      <stop offset="0.24" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b3b3b3"/>
+    </linearGradient>
+  </defs>
+  <title>timebar_bg</title>
+  <rect x="0.5" y="0.5" width="105.06" height="30.46" rx="6.34" ry="6.34" stroke="#777" stroke-miterlimit="10" fill="url(#linear-gradient)"/>
+</svg>

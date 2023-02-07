@@ -1,0 +1,12 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44.2 43.1">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-2929.55" x2="43.7" y2="-2929.55" gradientTransform="matrix(1, 0, 0, -1, 0, -2908)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c7c7c7"/>
+      <stop offset="1" stop-color="#f7f7f7"/>
+    </linearGradient>
+  </defs>
+  <title>buttonbg_pause</title>
+  <rect x="0.5" y="0.5" width="43.2" height="42.1" rx="4.1" ry="4.1" stroke="#777" stroke-miterlimit="10" fill="url(#linear-gradient)"/>
+  <rect x="15.67" y="12.67" width="5.17" height="18.83" fill="#1e94af"/>
+  <rect x="23.67" y="12.67" width="5.17" height="18.83" fill="#1e94af"/>
+</svg>
