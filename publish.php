@@ -71,13 +71,19 @@ $qcount = $scormmaker->local_scormcreator_questions($imsid);
     On editmode, it will delete the existing directory and create a new directory.
 */
 
+// Create a temporary directory:local_scormcreator in moodledata if not exists.
+
+if (!file_exists($CFG->tempdir .'/local_scormcreator/')) {
+    mkdir($CFG->tempdir .'/local_scormcreator/', 0755, true);
+}
+
 foreach ($manifest as $m) {
     $template = $m->template;
     $seriestitle = $m->seriestitle;
     $scormname = $m->scorm_name;
     $mid = $m->id;
     $source = 'scorm/templates/'.$template.'';
-    $destination = $CFG->dataroot.'/temp/'.$seriestitle.$imsid;
+    $destination = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid; 
 
     mkdir($destination, 0755);
     foreach ($iterator = new \RecursiveIteratorIterator(
@@ -92,7 +98,7 @@ foreach ($manifest as $m) {
 
     // Rename the template directory to seriestile.
     $oldname = $destination;
-    $newname = $CFG->dataroot.'/temp/'.$seriestitle.$imsid;
+    $newname = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid;
     rename($oldname, $newname);
 }
 
@@ -101,7 +107,7 @@ foreach ($manifest as $m) {
     Update and save the imsmanifest.xml.
 */
 
-$xml = simplexml_load_file($CFG->dataroot."/temp/".$seriestitle.$imsid."/imsmanifest.xml");
+$xml = simplexml_load_file($CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/imsmanifest.xml");
 foreach ($manifest as $xl) {
     // Update XML tags with php variable.
     $xml->organizations->organization->title = $xl->seriestitle;
@@ -112,7 +118,7 @@ foreach ($manifest as $xl) {
 }
 
 // Save the updated XML document.
-$xml->asXML($CFG->dataroot."/temp/".$seriestitle.$imsid."/imsmanifest.xml");
+$xml->asXML($CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/imsmanifest.xml");
 
 /*
     **** SCORM-CREATOR: 3 ****
@@ -124,12 +130,12 @@ $xml->asXML($CFG->dataroot."/temp/".$seriestitle.$imsid."/imsmanifest.xml");
 
 // Rename the file launch.htm/launch.html/index.htm/index.html, submitted by the user.
 foreach ($manifest as $xl) {
-    rename($CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/launch.htm',
-           $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/'.$xl->landingpage);
+    rename($CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/launch.htm',
+           $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/'.$xl->landingpage);
 }
 
 // Update content definition in scripts/launchpage.html.
-$scormlaunch = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/scripts/launchpage.html';
+$scormlaunch = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/scripts/launchpage.html';
 $pcount = count($pageoptions);
 
 // Replace the string "var pageArray = new Array(2);" to page dynamic value.
@@ -172,8 +178,8 @@ $scormmaker->local_scormcreator_replace_string_infile($scormlaunch, $endarray, $
 // Create pages (page1.html, page2.html, etc.,).
 $pcount = count($pageoptions);
 for ($x = 2; $x <= $pcount; $x++) {
-    copy($CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/page2.html',
-         $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/page'.$x.'.html');
+    copy($CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/page2.html',
+         $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/page'.$x.'.html');
 }
 
 // Update the pagetitle, pagesubtitle, page sequence in each page.
@@ -184,8 +190,8 @@ foreach ($pageoptions as $po) {
 
     $pcount = count($pageoptions);
     for ($x = 1; $x <= $pcount; $x++) {
-        $page = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/page'.$x.'.html';
-        $numpage = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/page'.$num.'.html';
+        $page = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/page'.$x.'.html';
+        $numpage = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/page'.$num.'.html';
         if ($page == $numpage) {
 
             // Replace pagetitle.
@@ -227,7 +233,7 @@ foreach ($pageoptions as $po) {
             $downloadurl = $fileurl->get_port() ? $fileurl->get_scheme() . '://' . $fileurl->get_host() .
                             $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' .
                             $fileurl->get_host() . $fileurl->get_path();
-            $path = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/media/';
+            $path = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/media/';
             $file->copy_content_to($path.'/'.$file->get_filename());
         }
     }
@@ -254,11 +260,11 @@ foreach ($pageoptions as $po) {
             $downloadurl = $fileurl->get_port() ? $fileurl->get_scheme() . '://' . $fileurl->get_host() .
                            $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' .
                            $fileurl->get_host() . $fileurl->get_path();
-            $path = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/media/';
+            $path = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/media/';
             $file->copy_content_to($path.'/'.$file->get_filename());
 
             // Replace mp4, webm and vtt pages.
-            $numpage = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/page".$po->num.".html";
+            $numpage = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/data/page".$po->num.".html";
             if ($numpage) {
                 // Mp4).
                 $stringtoreplace47 = "filename.mp4";
@@ -297,12 +303,12 @@ foreach ($pageoptions as $po) {
                                $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' .
                                $fileurl->get_host() . $fileurl->get_path();
                 $url = '<a href="' . $downloadurl . '">' . $file->get_filename() . '</a><br/>';
-                $path = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/lang/en/';
+                $path = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/lang/en/';
 
                 $file->copy_content_to($path.'/'.$file->get_filename());
 
                 // Replace (webvttfile) to pages.
-                $numpage = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/page".$po->num.".html";
+                $numpage = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/data/page".$po->num.".html";
             if ($numpage) {
                     $stringtoreplace41 = "filename.vtt";
                     $replacewith41 = $file->get_filename();
@@ -334,17 +340,17 @@ foreach ($manifest as $manif) {
                             $fileurl->get_host() . $fileurl->get_path();
 
             $url = '<a href="' . $downloadurl . '">' . $file->get_filename() . '</a><br/>';
-            $path = $CFG->dataroot.'/temp/'.$seriestitle.$imsid.'/data/img/';
+            $path = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/img/';
             $file->copy_content_to($path.'/'.$file->get_filename());
 
-            $numpage = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/img/".$file->get_filename()."";
-            $numpage2 = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/img/logo_sel.png";
+            $numpage = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/img/'.$file->get_filename().'';
+            $numpage2 = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/img/logo_sel.png';
             rename($numpage, $numpage2);
 
             // Auto resize the logo.
             $image = imagecreatefrompng($numpage2);
             $imgresized = imagescale ($image, 200, 40);
-            imagepng($imgresized, $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/img/logo_sel.png");
+            imagepng($imgresized, $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid.'/data/img/logo_sel.png');
         }
     }
 }
@@ -357,7 +363,7 @@ foreach ($manifest as $manif) {
 */
 
 foreach ($quizoptions as $qt) {
-    $quiz = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/quiz.html";
+    $quiz = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/data/quiz.html";
 
     // Replace quiz.html (quizheading).
     $stringtoreplace1 = "Quiz Heading";
@@ -375,7 +381,7 @@ foreach ($quizoptions as $qt) {
 
 // Update quiz.js.
 $qcount = count($quizoptions);
-$quiz = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/scripts/quiz.js";
+$quiz = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/data/scripts/quiz.js";
 
 // Replace count of questions.
 $stringtoreplace1 = "i < 1";
@@ -445,7 +451,7 @@ foreach ($quizc as $qa) {
     }
 }
 
-$quiz = $CFG->dataroot."/temp/".$seriestitle.$imsid."/data/scripts/quiz.js";
+$quiz = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/data/scripts/quiz.js";
 $questr = array_pop($quecorner);
 
 // Update the question and answers.
@@ -467,9 +473,9 @@ foreach ($qcount as $qc) {
 
 */
 
-$rootpath = realpath($CFG->dataroot."/temp/".$seriestitle.$imsid."/");
+$rootpath = realpath($CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/");
 $zip = new ZipArchive();
-$zip->open($CFG->dataroot."/temp/".$seriestitle.$imsid."/".$seriestitle.$imsid.".zip",
+$zip->open($CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid."/".$seriestitle.$imsid.".zip",
            ZipArchive::CREATE | ZipArchive::OVERWRITE);
 $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootpath), RecursiveIteratorIterator::LEAVES_ONLY);
 
