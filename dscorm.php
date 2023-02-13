@@ -26,8 +26,6 @@ require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/tablelib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/lib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
