@@ -71,13 +71,19 @@ foreach ($scormtitle as $st) {
     $date->setTimestamp(intval($st->timemodified));
 
 	$stemp = $st->template;
+	$edit_scorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/edit/editmanifest.php',
+	              ['imsid' => $st->id, 
+				   'sesskey' => sesskey()]);
+	$del_scorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/dissolve.php',
+         	      ['delete' => $st->id,
+				   'dirpath' => $CFG->tempdir.'/local_scormcreator/'.$st->scorm_name,
+				   'sesskey' => sesskey()]);
     $scormdata->add_data(array(
         $st->scorm_name,
-        userdate($date->getTimestamp()),
+        userdate($date->getTimestamp()),		
         '<a href="'.$CFG->tempdir.'/local_scormcreator/'.$st->scorm_name.'/'.$st->scorm_name.'.zip" download="'.$st->scorm_name.'.zip"
             title="'.get_string('sload', 'local_scormcreator').'">'.$st->scorm_name.'.zip</a>',
-        '<a href="'.$CFG->wwwroot.'/local/scormcreator/edit/editmanifest.php?imsid='.$st->id.'" title="Edit SCORM">Edit</a> /
-         <a href="'.$CFG->wwwroot.'/local/scormcreator/dissolve.php?imsid='.$st->id.'" title="Delete SCORM">Delete</a>'));
+        html_writer::link($edit_scorm, get_string('edit')).'/'. html_writer::link($del_scorm, get_string('delete'))));
 }
 
 $scormdata->print_html();
