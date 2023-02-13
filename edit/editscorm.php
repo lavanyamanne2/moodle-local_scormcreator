@@ -64,7 +64,7 @@ foreach ($manifest as $m) {
     $scormname = $m->scorm_name;
     $mid = $m->id;
     if ($imsid == $mid) {
-        $scormdir = $CFG->dataroot."/temp/".$scormname;
+        $scormdir = $CFG->tempdir.'/local_scormcreator/'.$scormname;
         if (is_dir($scormdir)) {
             $scormmaker->local_scormcreator_deletedir($scormdir);
         }
