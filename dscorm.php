@@ -61,7 +61,7 @@ $scormdata->define_headers(array('Name', 'Time Created', 'Download', ' '));
 $scormdata->define_baseurl($PAGE->url);
 $scormdata->setup();
 
-$scormtitle = $DB->get_recordset_sql("SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
+$scormtitle = $DB->get_records_sql("SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
                                       FROM {sc_manifest} scm WHERE scm.scorm_name != ''");
 foreach ($scormtitle as $st) {
 
