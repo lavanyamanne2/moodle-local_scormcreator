@@ -57,72 +57,40 @@ $PAGE->set_heading($header);
 $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
 
 /**
- * Initialization of dissolvation class.
+ *
+ * The clean_scorm() function deletes the temporary scorm.
+ *
+ * @param My_Type $imsid
  */
-class local_scormcreator_dissolve {
+function local_scormcreator_cleanscorm($imsid) {
 
-    /**
-     *
-     * The local_scormcreator_mydir_delete() deletes the existing scorm directory.
-     *
-     * @param My_Type $path
-     */
-    public function local_scormcreator_mydir_delete($dirpath) {
-        if (!empty ($dirpath) && is_dir ($dirpath) ) {
-            // Upper dirs are not included to avoid disasters.
-            $dir  = new RecursiveDirectoryIterator($dirpath, RecursiveDirectoryIterator::SKIP_DOTS);
-            $files = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
-            foreach ($files as $f) {
-                if (is_file($f)) {
-                    unlink($f);
-                } else {
-                    $emptydirs[] = $f;
-                }
-            }
+    global $DB, $CFG, $imsid, $dirpath, $scormmaker;
 
-            if (!empty($emptydirs)) {
-                foreach ($emptydirs as $eachdir) {
-                    rmdir($eachdir);
-                }
-            } 
-			rmdir($dirpath);
-        }
-    }
+    // Calling the function local_scormcreator_deletedir($path) to clean up backend scorm folders.
+    $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+    $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+    foreach ($manifest as $m) {
+        $scormname = $m->scorm_name;
+		$scormdir = $CFG->tempdir.'/local_scormcreator/'.$scormname;      
+        $removedir = $scormmaker->local_scormcreator_deletedir($scormdir);
 
-    /**
-     *
-     * The clean_scorm() function deletes the temporary scorm.
-     *
-     * @param My_Type $imsid
-     */
-    public function local_scormcreator_cleanscorm($imsid) {
+        // Clean database records.
+        $delmanifest = $DB->delete_records('sc_manifest', array('id' => $imsid));
+        $delpage = $DB->delete_records('sc_page', array('imsid' => $imsid));
+        $delpageoptions = $DB->delete_records('sc_pageoptions', array('imsid' => $imsid));
+        $delquiz = $DB->delete_records('sc_quiz', array('imsid' => $imsid));
+        $delquizoptions = $DB->delete_records('sc_quizoptions', array('imsid' => $imsid));
 
-        global $DB, $CFG, $imsid, $scormmaker;
-
-        // Calling the function local_scormcreator_deletedir($path) to clean up backend scorm folders.
-        $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
-        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
-        foreach ($manifest as $m) {
-            $scormname = $m->scorm_name;
-            $removedir = $this->local_scormcreator_mydir_delete($CFG->tempdir.'/local_scormcreator/'.$scormname);
-
-            // Clean database records.
-            $delmanifest = $DB->delete_records('sc_manifest', array('id' => $imsid));
-            $delpage = $DB->delete_records('sc_page', array('imsid' => $imsid));
-            $delpageoptions = $DB->delete_records('sc_pageoptions', array('imsid' => $imsid));
-            $delquiz = $DB->delete_records('sc_quiz', array('imsid' => $imsid));
-            $delquizoptions = $DB->delete_records('sc_quizoptions', array('imsid' => $imsid));
-
-            return array('delmanifest' => $delmanifest, 'delpage' => $delpage,
-                         'delpageoptions' => $delpageoptions,
-                         'delquiz' => $delquiz, 'delquizoptions' => $delquizoptions,
-                         'removedir' => $removedir );
-        }
+        return array('delmanifest' => $delmanifest,
+              		 'delpage' => $delpage,
+                     'delpageoptions' => $delpageoptions,
+                     'delquiz' => $delquiz,
+					 'delquizoptions' => $delquizoptions,
+                     'removedir' => $removedir);
     }
 }
 
-if ($act = new local_scormcreator_dissolve()) {
-    $act->local_scormcreator_cleanscorm($imsid);
+if (local_scormcreator_cleanscorm($imsid)) {
     redirect(new moodle_url('/local/scormcreator/dscorm.php'));
 }
 
