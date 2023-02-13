@@ -97,12 +97,12 @@ class local_scormcreator_dissolve {
 
         global $DB, $CFG, $imsid, $scormmaker;
 
-        // Calling the function local_scormcreator_mydir_delete($path) to clean up backend scorm folders.
+        // Calling the function local_scormcreator_deletedir($path) to clean up backend scorm folders.
         $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
         $manifest = $scormmaker->local_scormcreator_manifest($imsid);
         foreach ($manifest as $m) {
             $scormname = $m->scorm_name;
-            $removedir = $this->local_scormcreator_mydir_delete($CFG->dataroot."/temp/".$scormname);
+            $removedir = $this->local_scormcreator_mydir_delete($CFG->tempdir.'/local_scormcreator/'.$scormname);
 
             // Clean database records.
             $delmanifest = $DB->delete_records('sc_manifest', array('id' => $imsid));
