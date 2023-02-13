@@ -142,7 +142,7 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_manifest($imsid) {
 
         global $DB;
-        $fest = $this->db->get_recordset_sql('SELECT * FROM {sc_manifest} WHERE id = '.$imsid.'');
+        $fest = $this->db->get_records_sql('SELECT * FROM {sc_manifest} WHERE id = '.$imsid.'');
         $feststem = [];
         foreach ($fest as $f) {
             $object = new stdClass();
@@ -170,7 +170,7 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_page($imsid) {
 
         global $DB;
-        $fest = $this->db->get_recordset_sql('SELECT * FROM {sc_page} WHERE imsid = '.$imsid.'');
+        $fest = $this->db->get_records_sql('SELECT * FROM {sc_page} WHERE imsid = '.$imsid.'');
         $feststem = [];
         foreach ($fest as $f) {
             $object = new stdClass();
@@ -190,7 +190,7 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_pageoptions($imsid) {
 
         global $DB;
-        $pageoption = $this->db->get_recordset_sql('SELECT @rownum := @rownum + 1 AS num, t.* FROM {sc_pageoptions} t,
+        $pageoption = $this->db->get_records_sql('SELECT @rownum := @rownum + 1 AS num, t.* FROM {sc_pageoptions} t,
                                                    (SELECT @rownum := 0) r WHERE imsid = '.$imsid.'');
         $pagestem = [];
         foreach ($pageoption as $po) {
@@ -218,7 +218,7 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_quiz($imsid) {
 
         global $DB;
-        $fest = $this->db->get_recordset_sql('SELECT * FROM {sc_quiz} WHERE imsid = '.$imsid.'');
+        $fest = $this->db->get_records_sql('SELECT * FROM {sc_quiz} WHERE imsid = '.$imsid.'');
         $feststem = [];
         foreach ($fest as $f) {
             $object = new stdClass();
@@ -238,7 +238,7 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_quizoptions($imsid) {
 
         global $DB;
-        $quizoption = $this->db->get_recordset_sql('SELECT * FROM {sc_quizoptions} WHERE imsid = '.$imsid.'');
+        $quizoption = $this->db->get_records_sql('SELECT * FROM {sc_quizoptions} WHERE imsid = '.$imsid.'');
         $quizstem = [];
         foreach ($quizoption as $qo) {
             $object = new stdClass();
@@ -268,8 +268,8 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_questions($imsid) {
 
         global $DB;
-        $question = $this->db->get_recordset_sql('SELECT count(*) AS quecount FROM {sc_quizoptions} WHERE
-                                                  imsid = '.$imsid.'');
+        $question = $this->db->get_records_sql('SELECT count(*) AS quecount FROM {sc_quizoptions} WHERE
+                                                imsid = '.$imsid.'');
         $qtype = [];
         foreach ($question as $que) {
             $object = new stdClass();
