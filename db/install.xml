@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/scormcreator/db" VERSION="20200131" COMMENT="XMLDB file for Moodle plugin local/scormcreator"
+<XMLDB PATH="local/scormcreator/db" VERSION="20200131" COMMENT="XMLDB file for Moodle plugin local/scormcreator."
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>
 
-    <TABLE NAME="sc_manifest" COMMENT="Default comment for scormcreator-imsmanifest">
+    <TABLE NAME="local_scormcreator_manifest" COMMENT="Default comment for scormcreator-imsmanifest.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="seriestitle" TYPE="char" LENGTH="1333" NOTNULL="true" SEQUENCE="false"/>
@@ -23,7 +23,7 @@
       </KEYS>
     </TABLE>
 
-    <TABLE NAME="sc_page" COMMENT="Default comment for scormcreator-page">
+    <TABLE NAME="local_scormcreator_page" COMMENT="Default comment for scormcreator-page">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="imsid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -35,7 +35,7 @@
       </KEYS>
     </TABLE>
 
-    <TABLE NAME="sc_pageoptions" COMMENT="Default comment for scormcreator-pageoptions">
+    <TABLE NAME="local_scormcreator_poptions" COMMENT="Default comment for scormcreator-pageoptions">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="imsid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -53,7 +53,7 @@
       </KEYS>
     </TABLE>
 
-    <TABLE NAME="sc_quiz" COMMENT="Default comment for scormcreator-quiz">
+    <TABLE NAME="local_scormcreator_quiz" COMMENT="Default comment for scormcreator-quiz">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="imsid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -65,7 +65,7 @@
       </KEYS>
     </TABLE>
 
-    <TABLE NAME="sc_quizoptions" COMMENT="Default comment for scormcreator-quizoptions">
+    <TABLE NAME="local_scormcreator_qoptions" COMMENT="Default comment for scormcreator-quizoptions">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="imsid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
