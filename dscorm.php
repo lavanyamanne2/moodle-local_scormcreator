@@ -26,6 +26,8 @@ require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/tablelib.php');
+require_once($CFG->dirroot . '/local/scormcreator/classes/lib.php');
+require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -61,8 +63,9 @@ $scormdata->define_headers(array('Name', 'Time Created', 'Download', ' '));
 $scormdata->define_baseurl($PAGE->url);
 $scormdata->setup();
 
-$scormtitle = $DB->get_records_sql("SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
-                                      FROM {sc_manifest} scm WHERE scm.scorm_name != ''");
+$emsid = '';
+$scormtitle = $DB->get_records_sql('SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
+                                    FROM {local_scormcreator_manifest} scm WHERE scm.scorm_name != ?', [$emsid]);						
 foreach ($scormtitle as $st) {
 
     $date = new DateTime();
@@ -79,8 +82,9 @@ foreach ($scormtitle as $st) {
     $scormdata->add_data(array(
         $st->scorm_name,
         userdate($date->getTimestamp()),		
-        '<a href="'.$CFG->tempdir.'/local_scormcreator/'.$st->scorm_name.'/'.$st->scorm_name.'.zip" download="'.$st->scorm_name.'.zip"
-            title="'.get_string('sload', 'local_scormcreator').'">'.$st->scorm_name.'.zip</a>',
+        '<a href="'.$CFG->tempdir.'/local_scormcreator/'.$st->scorm_name.'/'.$st->scorm_name.'.zip" 
+		    download="'.$st->scorm_name.'.zip" title="'.get_string('sload', 'local_scormcreator').'">'.$st->scorm_name.'.zip
+		 </a>',
         html_writer::link($edit_scorm, get_string('edit')).'/'. html_writer::link($del_scorm, get_string('delete'))));
 }
 
