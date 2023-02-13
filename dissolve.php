@@ -35,9 +35,10 @@ if ($path) {
     $pageparams['path'] = $path;
 }
 
-$imsid = required_param('imsid', PARAM_INT);
+$imsid = required_param('delete', PARAM_INT);
+$dirpath = required_param('dirpath', PARAM_RAW);
 
-global $CFG, $USER, $DB, $OUTPUT, $PAGE, $instance, $imsid, $scormmaker;
+global $CFG, $USER, $DB, $OUTPUT, $PAGE, $instance, $imsid, $scormmaker, $dirpath;
 
 $PAGE->set_url('/local/scormcreator/dissolve.php', array('imsid' => $imsid));
 
@@ -66,10 +67,10 @@ class local_scormcreator_dissolve {
      *
      * @param My_Type $path
      */
-    public function local_scormcreator_mydir_delete($path) {
-        if (!empty ($path) && is_dir ($path) ) {
+    public function local_scormcreator_mydir_delete($dirpath) {
+        if (!empty ($dirpath) && is_dir ($dirpath) ) {
             // Upper dirs are not included to avoid disasters.
-            $dir  = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
+            $dir  = new RecursiveDirectoryIterator($dirpath, RecursiveDirectoryIterator::SKIP_DOTS);
             $files = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
             foreach ($files as $f) {
                 if (is_file($f)) {
@@ -83,7 +84,8 @@ class local_scormcreator_dissolve {
                 foreach ($emptydirs as $eachdir) {
                     rmdir($eachdir);
                 }
-            } rmdir($path);
+            } 
+			rmdir($dirpath);
         }
     }
 
