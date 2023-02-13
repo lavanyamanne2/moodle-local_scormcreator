@@ -86,6 +86,7 @@ foreach ($scormtitle as $st) {
         html_writer::link($edit_scorm, get_string('edit')).'/'. html_writer::link($del_scorm, get_string('delete'))));
 }
 
+
 $scormdata->print_html();
 
 echo $OUTPUT->footer();
