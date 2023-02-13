@@ -63,16 +63,18 @@ $scormdata->define_headers(array('Name', 'Time Created', 'Download', ' '));
 $scormdata->define_baseurl($PAGE->url);
 $scormdata->setup();
 
-$scormtitle = $DB->get_recordset_sql("SELECT scm.id, scm.template, scm.scorm_name,
-                                      FROM_UNIXTIME(scm.timemodified, '%D %M %Y %H:%I:%S') AS 'scmtime'
+$scormtitle = $DB->get_recordset_sql("SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
                                       FROM {sc_manifest} scm WHERE scm.scorm_name != ''");
 foreach ($scormtitle as $st) {
 
-    $stemp = $st->template;
+    $date = new DateTime();
+    $date->setTimestamp(intval($st->timemodified));
+
+	$stemp = $st->template;
     $scormdata->add_data(array(
         $st->scorm_name,
-        $st->scmtime,
-        '<a href="'.$CFG->dataroot.'/temp/'.$st->scorm_name.'/'.$st->scorm_name.'.zip" download="'.$st->scorm_name.'.zip"
+        userdate($date->getTimestamp()),
+        '<a href="'.$CFG->tempdir.'/local_scormcreator/'.$st->scorm_name.'/'.$st->scorm_name.'.zip" download="'.$st->scorm_name.'.zip"
             title="'.get_string('sload', 'local_scormcreator').'">'.$st->scorm_name.'.zip</a>',
         '<a href="'.$CFG->wwwroot.'/local/scormcreator/edit/editmanifest.php?imsid='.$st->id.'" title="Edit SCORM">Edit</a> /
          <a href="'.$CFG->wwwroot.'/local/scormcreator/dissolve.php?imsid='.$st->id.'" title="Delete SCORM">Delete</a>'));
