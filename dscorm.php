@@ -75,7 +75,7 @@ foreach ($scormtitle as $st) {
 	              ['imsid' => $st->id, 
 				   'sesskey' => sesskey()]);
 	$del_scorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/dissolve.php',
-         	      ['delete' => $st->id,
+         	      [get_string('delete') => $st->id,
 				   'dirpath' => $CFG->tempdir.'/local_scormcreator/'.$st->scorm_name,
 				   'sesskey' => sesskey()]);
     $scormdata->add_data(array(
