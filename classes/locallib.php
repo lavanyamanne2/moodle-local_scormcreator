@@ -69,18 +69,18 @@ class local_scormcreator_scormlib {
      *
      * @param My_Type $path
      */
-    public function local_scormcreator_deletedir($path) {
+    public function local_scormcreator_deletedir($dirpath) {
 
-        if (is_dir($path) === true) {
+        if (is_dir($dirpath) === true) {
 
-            $files = array_diff(scandir($path), array('.', '..'));
+            $files = array_diff(scandir($dirpath), array('.', '..'));
 
             foreach ($files as $file) {
-                self::local_scormcreator_deletedir(realpath($path) . '/' . $file);
+                self::local_scormcreator_deletedir(realpath($dirpath) . '/' . $file);
             }
-            return rmdir($path);
-        } else if (is_file($path) === true) {
-            return unlink($path);
+            return rmdir($dirpath);
+        } else if (is_file($dirpath) === true) {
+            return unlink($dirpath);
         }
         return false;
     }
