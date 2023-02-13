@@ -35,7 +35,7 @@ if ($path) {
     $pageparams['path'] = $path;
 }
 
-$imsid = required_param('delete', PARAM_INT);
+$imsid = required_param(get_string('delete'), PARAM_INT);
 $dirpath = required_param('dirpath', PARAM_RAW);
 
 global $CFG, $USER, $DB, $OUTPUT, $PAGE, $instance, $imsid, $scormmaker, $dirpath;
