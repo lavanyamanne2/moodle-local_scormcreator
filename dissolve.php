@@ -54,7 +54,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 /**
  *
@@ -67,7 +67,7 @@ function local_scormcreator_cleanscorm($imsid) {
     global $DB, $CFG, $imsid, $dirpath, $scormmaker;
 
     // Calling the function local_scormcreator_deletedir($path) to clean up backend scorm folders.
-    $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+    $scormmaker = new local_scormcreator_scormlib();
     $manifest = $scormmaker->local_scormcreator_manifest($imsid);
     foreach ($manifest as $m) {
         $scormname = $m->scorm_name;
@@ -75,11 +75,11 @@ function local_scormcreator_cleanscorm($imsid) {
         $removedir = $scormmaker->local_scormcreator_deletedir($scormdir);
 
         // Clean database records.
-        $delmanifest = $DB->delete_records('sc_manifest', array('id' => $imsid));
-        $delpage = $DB->delete_records('sc_page', array('imsid' => $imsid));
-        $delpageoptions = $DB->delete_records('sc_pageoptions', array('imsid' => $imsid));
-        $delquiz = $DB->delete_records('sc_quiz', array('imsid' => $imsid));
-        $delquizoptions = $DB->delete_records('sc_quizoptions', array('imsid' => $imsid));
+        $delmanifest = $DB->delete_records('local_scormcreator_manifest', array('id' => $imsid));
+        $delpage = $DB->delete_records('local_scormcreator_page', array('imsid' => $imsid));
+        $delpageoptions = $DB->delete_records('local_scormcreator_poptions', array('imsid' => $imsid));
+        $delquiz = $DB->delete_records('local_scormcreator_quiz', array('imsid' => $imsid));
+        $delquizoptions = $DB->delete_records('local_scormcreator_qoptions', array('imsid' => $imsid));
 
         return array('delmanifest' => $delmanifest,
               		 'delpage' => $delpage,
