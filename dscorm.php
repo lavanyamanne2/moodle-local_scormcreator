@@ -55,7 +55,7 @@ $PAGE->set_heading($header);
 
 echo $OUTPUT->header();
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 $scormdata = new flexible_table('tableviewer');
 $scormdata->define_columns(array('Name', 'Time Created', 'Download', ' '));
