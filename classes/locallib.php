@@ -28,46 +28,26 @@ global $CFG, $DB, $PAGE, $COURSE, $USER;
 require_login();
 
 /**
- * Initialization of scormlib class.
+ * Initialization of local_scormcreator_scormlib class.
  */
 class local_scormcreator_scormlib {
-
-    /**
+	
+	/**
      *
-     * @var cfg
-     *
-     * @var db
-     */
-    private $cfg, $db;
-
-    /**
-     *
-     * @var filename
-     * @var stringtoreplace
-     * @var replacewith
-     * @var path
-     * @var defaultvalues
-     * @var imsid
+     * @var $filename
+     * @var $stringtoreplace
+     * @var $replacewith
+     * @var $path
+     * @var $defaultvalues
+     * @var $imsid
      */
     public $filename, $stringtoreplace, $replacewith, $path, $defaultvalues, $imsid;
 
     /**
      *
-     * The __construct() defines the objects: $cfg, $db
-     *
-     * @param My_Type $cfg
-     * @param My_Type $db
-     */
-    public function __construct($cfg, $db) {
-        $this->cfg = $cfg;
-        $this->db = $db;
-    }
-
-    /**
-     *
      * The local_scormcreator_deleteDir() delete the existing scorm directory.
      *
-     * @param My_Type $path
+     * @param My_Type $dirpath
      */
     public function local_scormcreator_deletedir($dirpath) {
 
@@ -141,8 +121,8 @@ class local_scormcreator_scormlib {
      */
     public function local_scormcreator_manifest($imsid) {
 
-        global $DB;
-        $fest = $this->db->get_records('local_scormcreator_manifest', ['id' => $imsid]);
+        global $DB, $CFG;
+        $fest = $DB->get_records('local_scormcreator_manifest', ['id' => $imsid]);
         $feststem = [];
         foreach ($fest as $f) {
             $object = new stdClass();
@@ -169,8 +149,8 @@ class local_scormcreator_scormlib {
      */
     public function local_scormcreator_page($imsid) {
 
-        global $DB;
-        $fest = $this->db->get_records('local_scormcreator_page', ['imsid' => $imsid]);				
+        global $DB, $CFG;
+        $fest = $DB->get_records('local_scormcreator_page', ['imsid' => $imsid]);				
         $feststem = [];
         foreach ($fest as $f) {
             $object = new stdClass();
@@ -189,9 +169,9 @@ class local_scormcreator_scormlib {
      */
     public function local_scormcreator_pageoptions($imsid) {
 
-        global $DB;
-        $pageoption = $this->db->get_records_sql('SELECT @rownum := @rownum + 1 AS num, t.* FROM {local_scormcreator_poptions} t,
-                                                  (SELECT @rownum := 0) r WHERE id = ?', [$imsid]);				  
+        global $DB, $CFG;
+        $pageoption = $DB->get_records_sql('SELECT @rownum := @rownum + 1 AS num, t.* FROM {local_scormcreator_poptions} t,
+                                            (SELECT @rownum := 0) r WHERE id = ?', [$imsid]);				  
         $pagestem = [];
         foreach ($pageoption as $po) {
             $object = new stdClass();
@@ -217,8 +197,8 @@ class local_scormcreator_scormlib {
      */
     public function local_scormcreator_quiz($imsid) {
 
-        global $DB;
-        $fest = $this->db->get_records('local_scormcreator_quiz', ['imsid' => $imsid]);		
+        global $DB, $CFG;
+        $fest = $DB->get_records('local_scormcreator_quiz', ['imsid' => $imsid]);		
         $feststem = [];
         foreach ($fest as $f) {
             $object = new stdClass();
@@ -237,8 +217,8 @@ class local_scormcreator_scormlib {
      */
     public function local_scormcreator_quizoptions($imsid) {
 
-        global $DB;
-        $quizoption = $this->db->get_records('local_scormcreator_qoptions', ['imsid' => $imsid]);		
+        global $DB, $CFG;
+        $quizoption = $DB->get_records('local_scormcreator_qoptions', ['imsid' => $imsid]);		
         $quizstem = [];
         foreach ($quizoption as $qo) {
             $object = new stdClass();
@@ -267,8 +247,8 @@ class local_scormcreator_scormlib {
      */
     public function local_scormcreator_questions($imsid) {
 
-        global $DB;
-        $question = $this->db->get_records_sql('SELECT count(*) AS quecount FROM {local_scormcreator_qoptions} WHERE
+        global $DB, $CFG;
+        $question = $DB->get_records_sql('SELECT count(*) AS quecount FROM {local_scormcreator_qoptions} WHERE
                                                 imsid = ?', [$imsid]);											
         $qtype = [];
         foreach ($question as $que) {
