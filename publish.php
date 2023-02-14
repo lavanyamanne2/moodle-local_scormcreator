@@ -55,7 +55,7 @@ $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
 // Define the local_scormcreator_scormlib class functions.
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 $manifest = $scormmaker->local_scormcreator_manifest($imsid);
 $page = $scormmaker->local_scormcreator_page($imsid);
 $pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
@@ -497,7 +497,7 @@ $zip->close();
 $getsessiontitle = $scormmaker->local_scormcreator_manifest($imsid);
 foreach ($getsessiontitle as $st) {
     $sessiontitle = $st->seriestitle;
-    $DB->execute('UPDATE {sc_manifest} SET scorm_name="'.$sessiontitle.$imsid.'" WHERE id='.$imsid.'');
+    $DB->execute('UPDATE {local_scormcreator_manifest} SET scorm_name="'.$sessiontitle.$imsid.'" WHERE id='.$imsid.'');
     redirect(new moodle_url('/local/scormcreator/dscorm.php'));
 }
 
