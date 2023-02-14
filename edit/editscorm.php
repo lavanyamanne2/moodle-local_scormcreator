@@ -56,7 +56,7 @@ $PAGE->set_heading($header);
 
 // On editmode, delete if the directory exists.
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 $manifest = $scormmaker->local_scormcreator_manifest($imsid);
 
