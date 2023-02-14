@@ -170,8 +170,8 @@ class local_scormcreator_scormlib {
     public function local_scormcreator_pageoptions($imsid) {
 
         global $DB, $CFG;
-        $pageoption = $DB->get_records_sql('SELECT @rownum := @rownum + 1 AS num, t.* FROM {local_scormcreator_poptions} t,
-                                            (SELECT @rownum := 0) r WHERE id = ?', [$imsid]);				  
+        $pageoption = $DB->get_records_sql('SELECT ROW_NUMBER() OVER (ORDER BY t.id) AS num, t.* FROM 
+		                                   {local_scormcreator_poptions} t WHERE imsid = ?', [$imsid]);											  
         $pagestem = [];
         foreach ($pageoption as $po) {
             $object = new stdClass();
