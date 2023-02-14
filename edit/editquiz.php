@@ -54,7 +54,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 /**
  * Initialization of editquiz_form class.
@@ -70,7 +70,7 @@ class local_scormcreator_editquiz_form extends moodleform {
 
         global $DB, $CFG, $PAGE, $context, $imsid, $instance, $scormmaker;
 
-        $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+        $scormmaker = new local_scormcreator_scormlib();
 
         $mform = $this->_form;
 
@@ -249,13 +249,13 @@ if ($mform->is_cancelled()) {
     if ($data = $mform->get_data()) {
 
         // Save quiz to sc_quiz if imsid doesn't exists.
-        if (!$DB->record_exists('sc_quiz', array('imsid' => $imsid))) {
+        if (!$DB->record_exists('local_scormcreator_quiz', array('imsid' => $imsid))) {
 
             $quiz = new stdClass();
             $timemodified = time();
             $quiz->imsid = $imsid;
             $quiz->timemodified = $timemodified;
-            $DB->insert_record('sc_quiz', $quiz);
+            $DB->insert_record('local_scormcreator_quiz', $quiz);
         }
 
         // Get pageid.
@@ -292,8 +292,8 @@ if ($mform->is_cancelled()) {
                 $quizoption->qincorrect2 = $data->qincorrect2[$index];
                 $quizoption->qincorrect3 = $data->qincorrect3[$index];
                 $quizoption->timemodified = $timemodified;
-                if (!$DB->record_exists('sc_quizoptions', array('id' => $quizoption->id))) {
-                    $DB->insert_record('sc_quizoptions', $quizoption);
+                if (!$DB->record_exists('local_scormcreator_qoptions', array('id' => $quizoption->id))) {
+                    $DB->insert_record('local_scormcreator_qoptions', $quizoption);
                 }
             }
         }
@@ -318,8 +318,8 @@ if ($mform->is_cancelled()) {
                 $quizoption->qincorrect2 = $data->qincorrect2[$index];
                 $quizoption->qincorrect3 = $data->qincorrect3[$index];
                 $quizoption->timemodified = $timemodified;
-                if ($DB->record_exists('sc_quizoptions', array('id' => $quizoption->id))) {
-                    $DB->update_record('sc_quizoptions', $quizoption);
+                if ($DB->record_exists('local_scormcreator_qoptions', array('id' => $quizoption->id))) {
+                    $DB->update_record('local_scormcreator_qoptions', $quizoption);
                     redirect(new moodle_url('/local/scormcreator/edit/editscorm.php', array('imsid' => $imsid)));
                 }
             }
