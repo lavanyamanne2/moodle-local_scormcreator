@@ -21,7 +21,6 @@
  * @copyright  2023 Lavanya Manne
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
@@ -52,7 +51,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 /**
  * Initialization of manifest_form class.
@@ -68,7 +67,7 @@ class local_scormcreator_manifest_form extends moodleform {
 
         global $DB, $CFG, $PAGE, $context, $imsid, $instance;
 
-        $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+        $scormmaker = new local_scormcreator_scormlib();
 
         $mform = $this->_form;
 
@@ -237,7 +236,7 @@ if ($mform->is_cancelled()) {
         $data->landingpage = $data->landingpage;
         $data->pagecount = $data->pagecount;
         $data->logo = $data->logo;
-        $data->id = $DB->insert_record('sc_manifest', $data);
+        $data->id = $DB->insert_record('local_scormcreator_manifest', $data);
 
         // Save the logo file.
         $getlogo = $scormmaker->local_scormcreator_manifest($data->id);
