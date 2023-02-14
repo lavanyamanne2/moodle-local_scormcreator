@@ -54,7 +54,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 /**
  * Initialization of editmanifest_form class.
@@ -70,7 +70,7 @@ class local_scormcreator_editmanifest_form extends moodleform {
 
         global $DB, $CFG, $PAGE, $context, $imsid, $scormmaker;
 
-        $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+        $scormmaker = new local_scormcreator_scormlib();
 
         $mform = $this->_form;
 
@@ -249,8 +249,8 @@ if ($mform->is_cancelled()) {
         $record->logo = $data->logo;
         $record->timemodified = $timemodified;
 
-        if ($DB->record_exists('sc_manifest', array('id' => $imsid))) {
-            $DB->update_record('sc_manifest', $record);
+        if ($DB->record_exists('local_scormcreator_manifest', array('id' => $imsid))) {
+            $DB->update_record('local_scormcreator_manifest', $record);
         }
         redirect(new moodle_url('/local/scormcreator/edit/editpage.php', array('imsid' => $imsid)));
     }
