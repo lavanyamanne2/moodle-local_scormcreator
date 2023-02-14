@@ -55,7 +55,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+$scormmaker = new local_scormcreator_scormlib();
 
 /**
  * Initialization of pagecontext_form.
@@ -71,7 +71,7 @@ class local_scormcreator_pagecontext_form extends moodleform {
 
         global $DB, $CFG, $PAGE, $imsid, $instance, $contextid, $scormmaker, $context;
 
-        $scormmaker = new local_scormcreator_scormlib($CFG, $DB);
+        $scormmaker = new local_scormcreator_scormlib();
 
         $mform = $this->_form;
 
@@ -202,13 +202,13 @@ if ($mform->is_cancelled()) {
     if ($data = $mform->get_data()) {
 
         // Save page to sc_page if imsid doesn't exists.
-        if (!$DB->record_exists('sc_page', array('imsid' => $imsid))) {
+        if (!$DB->record_exists('local_scormcreator_page', array('imsid' => $imsid))) {
 
             $page = new stdClass();
             $timemodified = time();
             $page->imsid = $imsid;
             $page->timemodified = $timemodified;
-            $DB->insert_record('sc_page', $page);
+            $DB->insert_record('local_scormcreator_page', $page);
         }
 
         // Get pageid.
@@ -218,7 +218,7 @@ if ($mform->is_cancelled()) {
         }
 
         // Save pageoptions to sc_pageoptions if imsid doesn't exists.
-        if (!$DB->record_exists('sc_pageoptions', array('imsid' => $imsid))) {
+        if (!$DB->record_exists('local_scormcreator_poptions', array('imsid' => $imsid))) {
 
             // Transcript, Pagetitle, Pagesubtitle, Pagevideo and Webvtt.
             foreach ($data->pagetitle as $index => $value) {
@@ -235,7 +235,7 @@ if ($mform->is_cancelled()) {
                     $pageoption->pagevideo = $data->attachment[$index];
                     $pageoption->webvttfile = $data->webvttfile[$index];
                     $pageoption->timemodified = $timemodified;
-                    $DB->insert_record('sc_pageoptions', $pageoption);
+                    $DB->insert_record('local_scormcreator_poptions', $pageoption);
                 }
             }
         }
