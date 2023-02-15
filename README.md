@@ -1,6 +1,6 @@
 SCORM-CREATOR
 =============
-SCORM-CREATOR Plugin creates a standalone SCORM HTML5 package with no content tools.
+SCORM-CREATOR Plugin creates a standalone HTML5 SCORM package with no content tools.
 
 # Installation
 
@@ -16,16 +16,20 @@ Refresh the Moodle site, the installation will start.
 
 Site Administration > General > SCORM-CREATOR
 
-It is good to have video's and webvtt files to create the HTML5 SCORM package.
-
-Site Administartion > Server > File types: follow setting screenshot.(pix folder).
+Site Administration > Server > File types: follow the setting (refer setting in samples directory).
 
 # Note
 
-# It is mandatory to have content video file (MP4 format) with a supported WebVTT file for captions.
+# The plugin supports only MP4 file format.
 
-# Web Video Text Tracks Format (WebVTT) is a format for displaying timed text tracks (such as subtitles or captions).
+# It is mandatory to have both video and supported webvtt files.
 
-# You could create a manual WebVTT for your video by following a template in samples directoy.
+# Web Video Text Tracks (WebVTT) is a file format to display timed text tracks (such as subtitles or captions).
 
-# Pattern for text elements will not allow * [] \ ' "
+# You can create a manual WebVTT for your video by following a webvtttemplate in samples directoy.
+
+# Make sure you have a similar filename for your video and WebVTT and with no spaces.
+
+# Make sure you have a png format Logo with dimensions scale upto: 200 X 40.
+
+# Pattern for form text elements will not allow * [] \ ' "
