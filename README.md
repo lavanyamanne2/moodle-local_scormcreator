@@ -22,6 +22,10 @@ Site Administartion > Server > File types: follow setting screenshot.(pix folder
 
 # Note
 
-It is mandatory to have content video file (MP4 format) with a supported WebVTT file for captions.
-Web Video Text Tracks Format (WebVTT) is a format for displaying timed text tracks (such as subtitles or captions).
-Pattern for text element will not allow * [] \ ' "
+# It is mandatory to have content video file (MP4 format) with a supported WebVTT file for captions.
+
+# Web Video Text Tracks Format (WebVTT) is a format for displaying timed text tracks (such as subtitles or captions).
+
+# You could create a manual WebVTT for your video by following a template in samples directoy.
+
+# Pattern for text elements will not allow * [] \ ' "
