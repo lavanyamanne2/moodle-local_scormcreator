@@ -71,7 +71,7 @@ function local_scormcreator_cleanscorm($imsid) {
     $manifest = $scormmaker->local_scormcreator_manifest($imsid);
     foreach ($manifest as $m) {
         $scormname = $m->scorm_name;
-		$scormdir = $CFG->tempdir.'/local_scormcreator/'.$scormname;      
+        $scormdir = $CFG->tempdir.'/local_scormcreator/'.$scormname;
         $removedir = $scormmaker->local_scormcreator_deletedir($scormdir);
 
         // Clean database records.
@@ -82,10 +82,10 @@ function local_scormcreator_cleanscorm($imsid) {
         $delquizoptions = $DB->delete_records('local_scormcreator_qoptions', array('imsid' => $imsid));
 
         return array('delmanifest' => $delmanifest,
-              		 'delpage' => $delpage,
+                     'delpage' => $delpage,
                      'delpageoptions' => $delpageoptions,
                      'delquiz' => $delquiz,
-					 'delquizoptions' => $delquizoptions,
+                     'delquizoptions' => $delquizoptions,
                      'removedir' => $removedir);
     }
 }
