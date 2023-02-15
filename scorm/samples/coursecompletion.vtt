@@ -1,0 +1,38 @@
+WEBVTT FILE
+
+
+00:00:00.500 --> 00:00:02.000
+Course completion with conditions
+
+00:00:05.000 --> 00:00:09.000
+The tutorial show you the course completion with date condition
+
+00:00:10.000 --> 00:00:11.000
+Login as an administrator
+
+00:00:13.000 --> 00:00:16.000
+Choose the course and enable date condition
+
+00:00:32.000 --> 00:00:33.000
+Turn edit mode
+
+00:00:36.000 --> 00:00:38.000
+Add course completion status block
+
+00:00:43.000 --> 00:00:48.000
+The course is marked complete when the user attempt on or before July.31st
+
+00:00:53.000 --> 00:00:55.000
+Login as user to attempt the course
+
+00:01:38.000 --> 00:01:39.000
+Run cron manually
+
+00:01:45.000 --> 00:01:46.000
+Refresh the user page
+
+00:01:48.000 --> 00:01:53.000
+Repeat cron execution until the course completion status block is updated
+
+00:01:59.000 --> 00:02:01.000
+User anne has compleleted the course
