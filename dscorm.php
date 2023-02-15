@@ -65,29 +65,28 @@ $scormdata->setup();
 
 $emsid = '';
 $scormtitle = $DB->get_records_sql('SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
-                                    FROM {local_scormcreator_manifest} scm WHERE scm.scorm_name != ?', [$emsid]);						
+                                    FROM {local_scormcreator_manifest} scm WHERE scm.scorm_name != ?', [$emsid]);
 foreach ($scormtitle as $st) {
 
     $date = new DateTime();
     $date->setTimestamp(intval($st->timemodified));
 
-	$stemp = $st->template;
-	$edit_scorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/edit/editmanifest.php',
-	              ['imsid' => $st->id, 
-				   'sesskey' => sesskey()]);
-	$del_scorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/dissolve.php',
-         	      [get_string('delete') => $st->id,
-				   'dirpath' => $CFG->tempdir.'/local_scormcreator/'.$st->scorm_name,
-				   'sesskey' => sesskey()]);
+    $stemp = $st->template;
+    $editscorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/edit/editmanifest.php',
+                  ['imsid' => $st->id,
+                   'sesskey' => sesskey()]);
+    $delscorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/dissolve.php',
+                  [get_string('delete') => $st->id,
+                   'dirpath' => $CFG->tempdir.'/local_scormcreator/'.$st->scorm_name,
+                   'sesskey' => sesskey()]);
     $scormdata->add_data(array(
         $st->scorm_name,
-        userdate($date->getTimestamp()),		
-        '<a href="'.$CFG->tempdir.'/local_scormcreator/'.$st->scorm_name.'/'.$st->scorm_name.'.zip" 
-		    download="'.$st->scorm_name.'.zip" title="'.get_string('sload', 'local_scormcreator').'">'.$st->scorm_name.'.zip
-		 </a>',
-        html_writer::link($edit_scorm, get_string('edit')).'/'. html_writer::link($del_scorm, get_string('delete'))));
+        userdate($date->getTimestamp()),
+        '<a href="'.$CFG->tempdir.'/local_scormcreator/'.$st->scorm_name.'/'.$st->scorm_name.'.zip"
+            download="'.$st->scorm_name.'.zip" title="'.get_string('sload', 'local_scormcreator').'">'.$st->scorm_name.'.zip
+         </a>',
+        html_writer::link($editscorm, get_string('edit')).'/'. html_writer::link($delscorm, get_string('delete'))));
 }
-
 
 $scormdata->print_html();
 
