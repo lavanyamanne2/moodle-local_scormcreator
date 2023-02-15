@@ -20,7 +20,7 @@ Site Administration > Server > File types: follow the setting (refer setting in 
 
 # Note
 
-# The plugin supports only MP4 file format.
+# The plugin supports .f4v .fmp4 .m4v .mp4 file formats.
 
 # It is mandatory to have both video and supported webvtt files.
 
