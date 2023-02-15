@@ -83,7 +83,7 @@ foreach ($manifest as $m) {
     $scormname = $m->scorm_name;
     $mid = $m->id;
     $source = 'scorm/templates/'.$template.'';
-    $destination = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid; 
+    $destination = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid;
 
     mkdir($destination, 0755);
     foreach ($iterator = new \RecursiveIteratorIterator(
