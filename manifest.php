@@ -99,18 +99,17 @@ class local_scormcreator_manifest_form extends moodleform {
          */
         $resource = array();
         $options = array("pattern = '^[0-9]{2}$'", 'maxlength' => '2', 'size' => '1');
-        $resource[] = $mform->createElement ('static', '', '', 'Series ## ');
+        $resource[] = $mform->createElement ('static', '', '', get_string('series', 'local_scormcreator'));
         $resource[] = $mform->createElement('text', 'resourceidone', get_string('resourceidone', 'local_scormcreator'),
                       $options);
-        $resource[] = $mform->createElement ('static', '', '', 'Session ## ');
+        $resource[] = $mform->createElement ('static', '', '', get_string('session', 'local_scormcreator'));
         $resource[] = $mform->createElement('text', 'resourceidtwo', '', $options, get_string('enable'));
         $mform->addGroup($resource, 'resource', get_string('resourceidone', 'local_scormcreator'), ' ', false);
         $mform->addRule('resource', get_string('required', 'local_scormcreator'), 'required', null, 'client');
         $mform->addHelpButton('resource', 'resourceidone', 'local_scormcreator');
         $mform->setType('resourceidone', PARAM_CLEANHTML);
         $mform->setType('resourceidtwo', PARAM_CLEANHTML);
-        $mform->addElement ('static', '', '',
-                            '<span style="color:#0f6cbf;">Numeric value for the series and session.</span>');
+        $mform->addElement ('static', '', '', get_string('resourcetext', 'local_scormcreator'));
 
         /* Landing page
            Rule types: (1) Must not be empty. (2) Input must match with text: launch.htm/launch.html/index.htm/index.html
@@ -121,8 +120,7 @@ class local_scormcreator_manifest_form extends moodleform {
         $mform->setType('landingpage', PARAM_RAW);
         $mform->addRule('landingpage', get_string('required', 'local_scormcreator'), 'required', null, 'client');
         $mform->addHelpButton('landingpage', 'landingpage', 'local_scormcreator');
-        $mform->addElement ('static', '', '',
-                            '<span style="color:#0f6cbf;">The launching html file that launches the scorm.</span>');
+		$mform->addElement ('static', '', '', get_string('landingpagetext', 'local_scormcreator'));
 
         /* Template
            Rule types: Must not be empty.
