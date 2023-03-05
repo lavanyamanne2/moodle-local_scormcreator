@@ -91,7 +91,7 @@ class local_scormcreator_scormlib {
         if ($this->current->instance) {
             $draftitemid = file_get_submitted_draft_itemid('page');
             $defaultvalues['page']['format'] = $defaultvalues['contentformat'];
-            $defaultvalues['page']['text']   = file_prepare_draft_area($draftitemid, $context->id,
+            $defaultvalues['page']['text'] = file_prepare_draft_area($draftitemid, $context->id,
                                                 'local_scormcreator', 'content', 0,
                                                 page_get_editor_options($context), $defaultvalues['content']);
             $defaultvalues['page']['itemid'] = $draftitemid;
