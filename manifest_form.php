@@ -240,7 +240,7 @@ if ($mform->is_cancelled()) {
         $getlogo = $scormmaker->local_scormcreator_manifest($data->id);
         foreach ($getlogo as $gl) {
             file_save_draft_area_files($gl->logo, $context->id, 'local_scormcreator', 'logo', '0', $logooptions);
-            redirect(new moodle_url('/local/scormcreator/pagecontext.php', array('imsid' => $data->id)));
+            redirect(new moodle_url('/local/scormcreator/pagecontext_form.php', array('imsid' => $data->id)));
         }
     }
 }
