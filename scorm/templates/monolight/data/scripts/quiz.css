@@ -16,7 +16,7 @@
 #quizheading {
     font-size: 18px;
     font-weight: bold;
-    text-indent: 0px;
+    text-indent: 0;
     color: #bf40bf;
     width: 1250px;
 }
@@ -33,7 +33,7 @@
     right: 5%;
     bottom: 10%;
     cursor: pointer;
-    background-image: linear-gradient(to left,rgb(191, 85, 236),rgb(178, 222, 39, 1));
+    background-image: linear-gradient(to left, rgb(191, 85, 236), rgb(178, 222, 39, 1));
     border-radius: 7px;
     text-shadow: 0 1px 1px #fff;
     font-family: Arial;
@@ -46,7 +46,7 @@
 }
 #start:hover {
     cursor: pointer;
-    background-image: linear-gradient(to left,rgb(191, 85, 236),rgb(178, 222, 39, 1));
+    background-image: linear-gradient(to left, rgb(191, 85, 236), rgb(178, 222, 39, 1));
     text-decoration: none;
     box-shadow: 0 0 6px 2px rgba(195, 221, 235, 1);
 }
@@ -56,7 +56,7 @@
     bottom: 10%;
     cursor: pointer;
     height: 25px;
-    background-image: linear-gradient(to left,rgb(191, 85, 236),rgb(178, 222, 39, 1));
+    background-image: linear-gradient(to left, rgb(191, 85, 236), rgb(178, 222, 39, 1));
     border-radius: 7px;
     text-shadow: 0 1px 1px #fff;
     font-family: Arial;
@@ -106,7 +106,7 @@
     color: #5a5a5a;
     margin-top: 35px;
 }
-#result th,td {
+#result th, td {
     border: 1px solid #d3d3d3;
     padding: 10px;
 }
@@ -129,7 +129,7 @@
 .qtitle {
     margin: 20px 0 6px 0;
     padding: 4px;
-    color:#bf40bf;
+    color: #bf40bf;
     font-family: arial;
     font-size: 15px;
 }
@@ -144,15 +144,15 @@
 /* 1601 to 1920 Screen Size + Chrome, Safari, and Edge: */
 @media (min-width: 1601px) and (max-width: 1920px) {
     #start {
-        right:5%;
+        right: 5%;
     }
     #threshold {
-        top:30%;
+        top: 30%;
     }
     #quiz {
-        top:100%;
+        top: 100%;
     }
     #submitanswer {
-        right:5%;
+        right: 5%;
     }
 }
