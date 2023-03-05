@@ -42,7 +42,7 @@
     padding: 12px 31px 12px 31px;
     border: 3px solid #fff;
     text-decoration: none;
-    box-shadow: 0 0 6 2px rgba(195, 221, 235, 1);
+    box-shadow: 0 0 6px 2px rgba(195, 221, 235, 1);
 }
 #start:hover {
     cursor: pointer;
@@ -95,7 +95,7 @@
 #questions {
     width: 1200px;
     font-size: 16px;
-    text-indent: 0px;
+    text-indent: 0;
     color: #432616;
 }
 #result {
@@ -108,25 +108,25 @@
     color: #80471c;
     margin-top: 35px;
 }
-#result th,td {
+#result th, td {
     border: 1px solid #d3d3d3;
     padding: 10px;
 }
 #score {
-    font-family:Arial;
-    font-size:16px;
-    font-weight:bold;
-    text-indent:0px;
-    color:#964B00;
-    margin:0 0 0 4px;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: bold;
+    text-indent: 0;
+    color: #964b00;
+    margin: 0 0 0 4px;
 }
 #summary {
-    font-family:Arial;
-    font-size:16px;
-    font-weight:bold;
-    text-indent:0px;
-    color:#008FCB;
-    margin:25px 0 0 4px;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: bold;
+    text-indent: 0;
+    color: #008fcb;
+    margin: 25px 0 0 4px;
 }
 .qtitle {
     margin: 20px 0 6px 0;
@@ -135,7 +135,7 @@
     font-family: arial;
     font-size: 15px;
 }
-.qchoices { 
+.qchoices {
     margin: 0 0 6px 3px;
     padding: 4px;
     color: #008fcb;
@@ -146,15 +146,15 @@
 /* 1601 to 1920 Screen Size + Chrome, Safari, and Edge: */
 @media (min-width: 1601px) and (max-width: 1920px) {
     #start {
-        right:5%;
+        right: 5%;
     }
     #threshold {
-        top:30%;
+        top: 30%;
     }
     #quiz {
-        top:100%;
+        top: 100%;
     }
     #submitanswer {
-        right:5%;
+        right: 5%;
     }
 }
