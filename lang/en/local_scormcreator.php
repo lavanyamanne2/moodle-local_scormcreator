@@ -54,9 +54,13 @@ $string['resourceidtwo_help'] = 'Resource is a container element for an individu
                                 [<b>resource_00_00</b>]<br>
                                  ex: resource_03_06 <br>
                                  ex: resource_09_05';
+$string['resourcetext'] = 'Numeric value for the series and session.';
+$string['series'] = 'Series ##';
+$string['session'] = 'Session ##';
 $string['landingpage'] = 'Landing page';
 $string['landingpage_help'] = 'Landing page is a quick launch of the SCORM package,
                                followed by <b>launch.htm/launch.html/index.htm/index.html</b>';
+$string['landingpagetext'] = 'The launching html file that launches the scorm.';							   
 $string['template'] = 'Template';
 $string['temp_select'] = 'Select template';
 $string['temp_bluemint'] = 'Bluemint';
@@ -190,4 +194,4 @@ $string['maximumchars'] = 'Maximum of {$a} characters!';
 $string['alphanumeric'] = 'You must enter only letters or numbers here!';
 
 // Dscorm.php.
-$string['sload'] = 'For security purposes, Browser applications block links to local files and directories. This includes linking to files on your hard drive, on mapped network drives and accessible via Uniform Naming Convention (UNC) paths. This prevents a number of unpleasant possibilities. You can download the scorm files from Moodledata/temp/(yourscorm) directory';
+$string['sload'] = 'For security purposes, Browser applications block the links to local files and directories. This includes linking to files on your hard drive, on mapped network drives and accessible via Uniform Naming Convention (UNC) paths. This prevents a number of unpleasant possibilities. You can download the scorm files from Moodledata/temp/local_scormcreator/(yourscorm)';
