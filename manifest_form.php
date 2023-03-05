@@ -78,7 +78,7 @@ class local_scormcreator_manifest_form extends moodleform {
            Rule types: Must not be empty, Characters should not exceed 1333.
          */
         $mform->addElement('text', 'seriestitle', get_string('seriestitle', 'local_scormcreator'), array('size' => 40,
-                           'maxlength="1333"', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+'));
+                           'maxlength="1333"', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+'));
         $mform->setType('seriestitle', PARAM_RAW);
         $mform->addRule('seriestitle', get_string('required', 'local_scormcreator'), 'required', null, 'client');
         $mform->addRule('seriestitle', get_string('maximumchars', 'local_scormcreator', 1333), 'maxlength', 1333, 'client');
@@ -88,7 +88,7 @@ class local_scormcreator_manifest_form extends moodleform {
            Rule types: Must not be empty, Characters should not exceed 1333.
          */
         $mform->addElement('text', 'sessiontitle', get_string('sessiontitle', 'local_scormcreator'), array('size' => 40,
-                           'maxlength = "1333"', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+'));
+                           'maxlength = "1333"', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+'));
         $mform->setType('sessiontitle', PARAM_RAW);
         $mform->addRule('sessiontitle', get_string('required', 'local_scormcreator'), 'required', null, 'client');
         $mform->addRule('sessiontitle', get_string('maximumchars', 'local_scormcreator', 1333), 'maxlength', 1333, 'client');
@@ -120,7 +120,7 @@ class local_scormcreator_manifest_form extends moodleform {
         $mform->setType('landingpage', PARAM_RAW);
         $mform->addRule('landingpage', get_string('required', 'local_scormcreator'), 'required', null, 'client');
         $mform->addHelpButton('landingpage', 'landingpage', 'local_scormcreator');
-		$mform->addElement ('static', '', '', get_string('landingpagetext', 'local_scormcreator'));
+        $mform->addElement ('static', '', '', get_string('landingpagetext', 'local_scormcreator'));
 
         /* Template
            Rule types: Must not be empty.
