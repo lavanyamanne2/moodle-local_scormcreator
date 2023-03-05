@@ -90,4 +90,7 @@ foreach ($scormtitle as $st) {
 
 $scormdata->print_html();
 
+$newscorm = new moodle_url($CFG->wwwroot.'/local/scormcreator/manifest_form.php', ['sesskey' => sesskey()]);
+echo html_writer::link($newscorm, get_string('cscorm', 'local_scormcreator'));
+
 echo $OUTPUT->footer();
