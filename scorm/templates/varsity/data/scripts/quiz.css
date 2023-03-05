@@ -11,7 +11,7 @@
     position: relative;
     height: 400px;
     width: 1250px;
-    margin: 25px 0 0 0;	
+    margin: 25px 0 0 0;
 }
 #quizheading {
     font-size: 18px;
@@ -107,7 +107,7 @@
     color: #e3340b;
     margin-top: 35px;
 }
-#result th,td {
+#result th, td {
     border: 1px solid #d3d3d3;
     padding: 10px;
 }
@@ -149,7 +149,7 @@
     }
     #threshold {
         top: 30%;
-        }
+    }
     #quiz {
         top: 100%;
     }
