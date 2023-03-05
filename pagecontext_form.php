@@ -246,7 +246,7 @@ if ($mform->is_cancelled()) {
             file_save_draft_area_files($gf->pagevideo, $context->id, 'local_scormcreator', 'attachment', '0', $file2options);
             file_save_draft_area_files($gf->webvttfile, $context->id, 'local_scormcreator', 'webvttfile', '0', $file3options);
         }
-        redirect(new moodle_url('/local/scormcreator/quizcontext.php', array('imsid' => $imsid)));
+        redirect(new moodle_url('/local/scormcreator/quizcontext_form.php', array('imsid' => $imsid)));
     }
 }
 
