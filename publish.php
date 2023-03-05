@@ -64,42 +64,41 @@ class local_scormcreator_publish {
 
     /**
      *
-     * @var $CFG
-	 * @var $imsid
-	 * @var $context
-	 * @var $scormmaker
+     * @var $imsid
+     * @var $context
+     * @var $scormmaker
      */
-    public $CFG, $imsid, $context, $scormmaker;
-	
-	/**
+    public $imsid, $context, $scormmaker;
+
+    /**
      *
      * SCORM-CREATOR: 1
-	   Create a temporary directory:local_scormcreator in moodledata if not exists.
+       Create a temporary directory:local_scormcreator in moodledata if not exists.
      *
      * @param My_Type $imsid
-     */ 
-	public function scormtemp($imsid) {
-        
+     */
+    public function scormtemp($imsid) {
+
         global $DB, $CFG;
         if (!file_exists($CFG->tempdir .'/local_scormcreator/')) {
-            mkdir($CFG->tempdir .'/local_scormcreator/', 0755, true);			
+            mkdir($CFG->tempdir .'/local_scormcreator/', 0755, true);
         }
-		return true;		
-	}
-	
-	/**
+        return true;
+    }
+
+    /**
      *
      * SCORM-CREATOR: 2
-	   Create a copy of directory, of your chosen template to moodledata/local_scormcreator
+       Create a copy of directory, of your chosen template to moodledata/local_scormcreator
        Rename the template directory to seriestitle.
      *
      * @param My_Type $imsid
-     */	
-	public function scormcopy($imsid) {
-		
-		global $CFG, $imsid, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-		foreach ($manifest as $m) {
+     */
+    public function scormcopy($imsid) {
+
+        global $CFG, $imsid, $scormmaker;
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        foreach ($manifest as $m) {
             $template = $m->template;
             $seriestitle = $m->seriestitle;
             $scormname = $m->scorm_name;
@@ -107,34 +106,34 @@ class local_scormcreator_publish {
             $source = 'scorm/templates/'.$template.'';
             $destination = $CFG->tempdir.'/local_scormcreator/'.$seriestitle.$imsid;
 
-            $mkdir_a = mkdir($destination, 0755);
+            $mkdira = mkdir($destination, 0755);
             foreach ($iterator = new \RecursiveIteratorIterator(
                 new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
                           \RecursiveIteratorIterator::SELF_FIRST) as $item) {
                 if ($item->isDir()) {
-                    $mkdir_b = mkdir($destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+                    $mkdirb = mkdir($destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
                 } else {
-                    $mkdir_c = copy($item, $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+                    $mkdirc = copy($item, $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
                 }
-			}
+            }
         }
-		return array('mkdir_a' => $mkdir_a, 'mkdir_b' => $mkdir_b, 'mkdir_c' => $mkdir_b);
+        return array('mkdira' => $mkdira, 'mkdirb' => $mkdirb, 'mkdirc' => $mkdirc);
     }
-		
-	/**
+
+    /**
      *
      * SCORM-CREATOR: 3
-	   Update and save the imsmanifest.xml.
+       Update and save the imsmanifest.xml.
      *
      * @param My_Type $imsid
-     */	
+     */
     public function scormxml($imsid) {
-		 
+
         global $CFG, $imsid, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-		foreach ($manifest as $m) {
-		    $xml = simplexml_load_file($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/imsmanifest.xml");
-		
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        foreach ($manifest as $m) {
+            $xml = simplexml_load_file($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/imsmanifest.xml");
+
             // Update XML tags with php variable.
             $xml->organizations->organization->title = $m->seriestitle;
             $xml->organizations->organization->item->title = $m->seriestitle;
@@ -144,25 +143,25 @@ class local_scormcreator_publish {
         }
         // Save the updated XML document.
         $savexml = $xml->asXML($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/imsmanifest.xml");
-		return $savexml;		
-	}
-			
-	/**
+        return $savexml;
+    }
+
+    /**
      *
      * SCORM-CREATOR: 4
-	   Rename the file launch.htm/launch.html/index.htm/index.html, submitted by the user.
+       Rename the file launch.htm/launch.html/index.htm/index.html, submitted by the user.
        Update strings, in scripts/launchpage.html.
      *
      * @param My_Type $imsid
-     */	
-	public function scormlaunchpage($imsid) {
-		
+     */
+    public function scormlaunchpage($imsid) {
+
         global $CFG, $imsid, $scormmaker;
-		
-		// Rename the file launch.htm/launch.html/index.htm/index.html, submitted by the user.
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-		$pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
-		foreach ($manifest as $m) {
+
+        // Rename the file launch.htm/launch.html/index.htm/index.html, submitted by the user.
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        $pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
+        foreach ($manifest as $m) {
             $r1 = rename($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/launch.htm',
                          $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/'.$m->landingpage);
         }
@@ -186,17 +185,17 @@ class local_scormcreator_publish {
         }
         $pagearray2 = implode("\n    ", $replacewith2);
         $r3 = $scormmaker->local_scormcreator_replace_string_infile($scormlaunch, $stringtoreplace2, $pagearray2);
-        $endarray = end($replacewith2); // end of loop value.
+        $endarray = end($replacewith2); // End of loop value.
         $beforeslash = strtok($endarray, '/'); // Get the string before '/' (slash).
-        $afterslash  = explode("/", $endarray); // Get the string before '/' (slash).
-		$afterslashend = end($afterslash);
+        $afterslash = explode("/", $endarray); // Get the string before '/' (slash).
+        $afterslashend = end($afterslash);
         $afterslashupdate = str_replace($afterslashend, ' ', 'quiz.html";');
         $combine = $beforeslash . '/' . $afterslashupdate; // Combine $beforeslash and $afterslashupdate.
         $r4 = $scormmaker->local_scormcreator_replace_string_infile($scormlaunch, $endarray, $combine);
-		return array ('r1' => $r1, 'r2' => $r2, 'r3' => $r3, 'r4' => $r4);		
-	}
-	
-	/**
+        return array ('r1' => $r1, 'r2' => $r2, 'r3' => $r3, 'r4' => $r4);
+    }
+
+    /**
      *
      * SCORM-CREATOR: 5
        Create pages (page1.html, page2.html....).
@@ -204,19 +203,19 @@ class local_scormcreator_publish {
      *
      * @param My_Type $imsid
      */
-	public function scormtitle($imsid) {
+    public function scormtitle($imsid) {
 
-		global $CFG, $imsid, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-		$pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
-		foreach ($manifest as $m) {
-		    // Create pages (page1.html, page2.html, etc.,).
+        global $CFG, $imsid, $scormmaker;
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        $pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
+        foreach ($manifest as $m) {
+            // Create pages (page1.html, page2.html, etc.,).
             $pcount = count($pageoptions);
             for ($x = 2; $x <= $pcount; $x++) {
                 $r1 = copy($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/data/page2.html',
                            $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/data/page'.$x.'.html');
             }
-		}
+        }
 
         // Update the pagetitle, pagesubtitle, page sequence in each page.
         foreach ($pageoptions as $po) {
@@ -242,24 +241,24 @@ class local_scormcreator_publish {
                     $replacepagewith3 = 'Page '.$x.' of '.$fp.'';
                     $r3 = $scormmaker->local_scormcreator_replace_string_infile($page, $pagetoreplace3, $replacepagewith3);
                 }
-            }			
+            }
         }
-        return array ('r1' => $r1, 'r2' => $r2, 'r3' => $r3);		
-	}
-	
-	/**
+        return array ('r1' => $r1, 'r2' => $r2, 'r3' => $r3);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 6 ****
+     SCORM-CREATOR: 6
      Move transcript file to media directory and replace them in pages.
      *
      * @param My_Type $imsid
      */
-	public function scormtranscript($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-		$pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
-		$file1options = array('subdirs' => 0, 'maxbytes' => '', 'context' => $context,
+    public function scormtranscript($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        $pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
+        $file1options = array('subdirs' => 0, 'maxbytes' => '', 'context' => $context,
                               'accepted_types' => array('.webm', '.ogg', '.pdf', '.docx', '.txt'),
                               'return_types' => FILE_INTERNAL | FILE_EXTERNAL );
         foreach ($pageoptions as $po) {
@@ -270,33 +269,33 @@ class local_scormcreator_publish {
 
                     $fileurl = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                                $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename(),
-							   false);
+                               false);
 
                     $downloadurl = $fileurl->get_port() ? $fileurl->get_scheme() . '://' . $fileurl->get_host() .
                                    $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' .
                                    $fileurl->get_host() . $fileurl->get_path();
-					foreach ($manifest as $m) {
+                    foreach ($manifest as $m) {
                         $path = $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/data/media/';
                         $transcript = $file->copy_content_to($path.'/'.$file->get_filename());
-					    return $transcript;		
-					}					
+                        return $transcript;
+                    }
                 }
-            }			
+            }
         }
-	}
-	
-	/**
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 7 ****
+     SCORM-CREATOR: 7
      Move mp4 videos to media directory and replace them in pages.
      *
      * @param My_Type $imsid
      */
-	public function scormmedia($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;		
-		$pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
-		$file2options = array('subdirs' => 0, 'maxbytes' => '', 'maxfiles' => 1, 'context' => $context,
+    public function scormmedia($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
+        $file2options = array('subdirs' => 0, 'maxbytes' => '', 'maxfiles' => 1, 'context' => $context,
                               'accepted_types' => array('video/mp4'),
                               'return_types' => FILE_INTERNAL | FILE_EXTERNAL );
         foreach ($pageoptions as $po) {
@@ -304,11 +303,11 @@ class local_scormcreator_publish {
             $fs = get_file_storage();
             if ($files = $fs->get_area_files($context->id, 'local_scormcreator', 'attachment', '0', 'sortorder', false)) {
                 foreach ($files as $file) {
-					$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-					foreach ($manifest as $m) {
+                    $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+                    foreach ($manifest as $m) {
                         $fileurl = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                                    $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename(),
-							       false);
+                                   false);
 
                         $downloadurl = $fileurl->get_port() ? $fileurl->get_scheme() . '://' . $fileurl->get_host() .
                                        $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' .
@@ -317,52 +316,52 @@ class local_scormcreator_publish {
                         $copyfile = $file->copy_content_to($path.'/'.$file->get_filename());
 
                         // Replace mp4, webm and vtt pages.
-					    $numpage = $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/data/page".$po->num.".html";
+                        $numpage = $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/data/page".$po->num.".html";
                         if ($numpage) {
                             // Mp4.
                             $stringtoreplace47 = "filename.mp4";
                             $replacewith47 = $file->get_filename();
-                            $mp4 = $scormmaker->local_scormcreator_replace_string_infile($numpage, $stringtoreplace47, 
-						           $replacewith47);
+                            $mp4 = $scormmaker->local_scormcreator_replace_string_infile($numpage, $stringtoreplace47,
+                                   $replacewith47);
 
                             // Webm.
                             $stringtoreplace48 = "filename.webm";
                             $beforedot48 = strtok($file->get_filename(), '.');
                             $replacewith48 = "".$beforedot48.".webm";
-                            $webm = $scormmaker->local_scormcreator_replace_string_infile($numpage, $stringtoreplace48, 
-						            $replacewith48);                            								
-						}						
-                    }					
+                            $webm = $scormmaker->local_scormcreator_replace_string_infile($numpage, $stringtoreplace48,
+                                    $replacewith48);
+                        }
+                    }
                 }
             }
-        }	
-        return array('copyfile' => $copyfile, 'mp4' => $mp4, 'webm' => $webm);			
-	}
-	
-	/**
+        }
+        return array('copyfile' => $copyfile, 'mp4' => $mp4, 'webm' => $webm);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 8 ****
+     SCORM-CREATOR: 8
      Move webvvtfile to lang directory and replace them in pages.
      *
      * @param My_Type $imsid
      */
-	public function scormvtt($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		$file3options = array('subdirs' => 0, 'maxbytes' => '', 'maxfiles' => 1, 'context' => $context,
+    public function scormvtt($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $file3options = array('subdirs' => 0, 'maxbytes' => '', 'maxfiles' => 1, 'context' => $context,
                              'accepted_types' => array('webvtt/vtt'),
                              'return_types' => FILE_INTERNAL | FILE_EXTERNAL );
-		$pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
+        $pageoptions = $scormmaker->local_scormcreator_pageoptions($imsid);
         foreach ($pageoptions as $po) {
             file_save_draft_area_files($po->webvttfile, $context->id, 'local_scormcreator', 'webvttfile', '0', $file3options);
             $fs = get_file_storage();
             if ($files = $fs->get_area_files($context->id, 'local_scormcreator', 'webvttfile', '0', 'sortorder', false)) {
                 foreach ($files as $file) {
-					$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-					foreach ($manifest as $m) {
+                    $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+                    foreach ($manifest as $m) {
                         $fileurl = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
                                    $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
-                                  $file->get_filename(), false);
+                                   $file->get_filename(), false);
 
                         $downloadurl = $fileurl->get_port() ? $fileurl->get_scheme() . '://' . $fileurl->get_host() .
                                        $fileurl->get_path() . ':' . $fileurl->get_port() : $fileurl->get_scheme() . '://' .
@@ -378,29 +377,29 @@ class local_scormcreator_publish {
                             $stringtoreplace41 = "filename.vtt";
                             $replacewith41 = $file->get_filename();
                             $vtt = $scormmaker->local_scormcreator_replace_string_infile($numpage, $stringtoreplace41,
-							$replacewith41);
-						}
+                            $replacewith41);
+                        }
                     }
                 }
             }
         }
-		return array('copyfile' => $copyfile, 'vtt' => $vtt);
-	}
-	
-	/**
+        return array('copyfile' => $copyfile, 'vtt' => $vtt);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 9 ****
+     SCORM-CREATOR: 9
      Move logo to img directory.
      *
      * @param My_Type $imsid
      */
-	public function scormlogo($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		$logooptions = array('subdirs' => 0, 'maxbytes' => '', 'context' => $context,
+    public function scormlogo($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $logooptions = array('subdirs' => 0, 'maxbytes' => '', 'context' => $context,
                              'accepted_types' => array('.png', '.jpg'),
                              'return_types' => FILE_INTERNAL | FILE_EXTERNAL);
-        $manifest = $scormmaker->local_scormcreator_manifest($imsid);							 
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
         foreach ($manifest as $m) {
             file_save_draft_area_files($m->logo, $context->id, 'local_scormcreator', 'logo', '0', $logooptions);
             $fs = get_file_storage();
@@ -424,28 +423,28 @@ class local_scormcreator_publish {
                     // Auto resize the logo.
                     $image = imagecreatefrompng($numpage2);
                     $imgresized = imagescale ($image, 200, 40);
-                    $imagepng = imagepng($imgresized, 
-					            $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/data/img/logo_sel.png');
+                    $imagepng = imagepng($imgresized,
+                                $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid.'/data/img/logo_sel.png');
                 }
             }
         }
-		return array('copyfile' => $copyfile, 'rename' => $rename, 'imagepng' => $imagepng);
-	}
-	
-	/**
+        return array('copyfile' => $copyfile, 'rename' => $rename, 'imagepng' => $imagepng);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 10 ****
+     SCORM-CREATOR: 10
      We are done with the pages, move to quiz. Update all the required strings in quiz.html.
      *
      * @param My_Type $imsid
      */
-	public function scormquiz_html($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-        $quizoptions = $scormmaker->local_scormcreator_quizoptions($imsid);		
+    public function scormquiz_html($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        $quizoptions = $scormmaker->local_scormcreator_quizoptions($imsid);
         foreach ($manifest as $m) {
-		    foreach ($quizoptions as $qt) {
+            foreach ($quizoptions as $qt) {
                 $quiz = $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/data/quiz.html";
 
                 // Replace quiz.html (quizheading).
@@ -458,27 +457,27 @@ class local_scormcreator_publish {
                 foreach ($qc as $qccd) {
                     $stringtoreplace2 = "Quiz Sub-heading";
                     $replacewith2 = $qccd->description;
-                    $q2 = $scormmaker->local_scormcreator_replace_string_infile($quiz, $stringtoreplace2, $replacewith2);					
+                    $q2 = $scormmaker->local_scormcreator_replace_string_infile($quiz, $stringtoreplace2, $replacewith2);
                 }
             }
-		}
-        return array('q1' => $q1, 'q2' => $q2);		
-	}
-	
-	/**
+        }
+        return array('q1' => $q1, 'q2' => $q2);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 11 ****
+     SCORM-CREATOR: 11
      Update question count value in quiz.js.
      *
      * @param My_Type $imsid
-     */	
-	public function scormquestion_count($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
-		$quizoptions = $scormmaker->local_scormcreator_quizoptions($imsid);
+     */
+    public function scormquestion_count($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
+        $quizoptions = $scormmaker->local_scormcreator_quizoptions($imsid);
         foreach ($manifest as $m) {
-		    // Update quiz.js.
+            // Update quiz.js.
             $qcount = count($quizoptions);
             $quiz = $CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/data/scripts/quiz.js";
 
@@ -492,25 +491,25 @@ class local_scormcreator_publish {
             $stringtoreplace2 = "i > 0";
             $replacewith2 = "i > ".$oneque."";
             $q2 = $scormmaker->local_scormcreator_replace_string_infile($quiz, $stringtoreplace2, $replacewith2);
-			
+
         }
-		return array ('q1' => $q1, 'q2' => $q2);
-	}
-	
-	/**
+        return array ('q1' => $q1, 'q2' => $q2);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 12 ****
+     SCORM-CREATOR: 12
      Update the questions value in quiz.js.
      *
      * @param My_Type $imsid
-     */	
-	public function scormquestions($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		// Replace questions.
+     */
+    public function scormquestions($imsid) {
+
+        global $CFG, $imsid, $context, $scormmaker;
+        // Replace questions.
         $quizc = $scormmaker->local_scormcreator_quizoptions($imsid);
-        $quecorner = [];        
-		foreach ($quizc as $qa) {
+        $quecorner = [];
+        foreach ($quizc as $qa) {
             // Correct answer.
             $qac = array($qa->qcorrect => "0", $qa->qincorrect1 => "1", $qa->qincorrect2 => "2", $qa->qincorrect3 => "3");
             $quiztoreplace3 = '{ question: "Question", answers: ["A", "B", "C", "D"], correctanswer: 0 }';
@@ -573,62 +572,60 @@ class local_scormcreator_publish {
                     $str = implode(", ", $quecorner)."".$questr." \n "; // The last question willn't have comma at the end.
                     $q2 = $scormmaker->local_scormcreator_replace_string_infile($quiz, $quiztoreplace3, $str);
                 }
-            }		
-		}
-		return array('q1' => $q1, 'q2' =>q2);
-	}	
-   
-	/**
+            }
+        }
+        return array('q1' => $q1, 'q2' => q2);
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 12 ****
+     SCORM-CREATOR: 12
      We udated all the strings and files to the scorm directory. Zip the directory.
      *
      * @param My_Type $imsid
-     */	
-	
+     */
     public function scormzip($imsid) {
-		
-		global $CFG, $imsid, $context, $scormmaker;
-		$manifest = $scormmaker->local_scormcreator_manifest($imsid);
+
+        global $CFG, $imsid, $context, $scormmaker;
+        $manifest = $scormmaker->local_scormcreator_manifest($imsid);
         foreach ($manifest as $m) {
- 		    $rootpath = realpath($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/");
-            $zip = new ZipArchive();		
+            $rootpath = realpath($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/");
+            $zip = new ZipArchive();
             $zip->open($CFG->tempdir.'/local_scormcreator/'.$m->seriestitle.$imsid."/".$m->seriestitle.$imsid.".zip",
                        ZipArchive::CREATE | ZipArchive::OVERWRITE);
             $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootpath),
-	                 RecursiveIteratorIterator::LEAVES_ONLY);
+                     RecursiveIteratorIterator::LEAVES_ONLY);
             foreach ($files as $name => $file) {
                 if (!$file->isDir()) {
                     $filepath = $file->getRealPath();
                     $relativepath = substr($filepath, strlen($rootpath) + 1);
                     $zip->addFile($filepath, $relativepath);
                 }
-			}
+            }
         }
         $zipclose = $zip->close();
-		return $zipclose;
-	}
-	
-	/**
+        return $zipclose;
+    }
+
+    /**
      *
-     **** SCORM-CREATOR: 13 ****
+     SCORM-CREATOR: 13
      Update database scormname and redirect to page where zip files can be downloadable.
      *
      * @param My_Type $imsid
-     */	
-	
+     */
     public function savescorm($imsid) {
-		
-		global $DB, $CFG, $imsid, $context, $scormmaker;		
-		$getsessiontitle = $scormmaker->local_scormcreator_manifest($imsid);
+
+        global $DB, $CFG, $imsid, $context, $scormmaker;
+        $getsessiontitle = $scormmaker->local_scormcreator_manifest($imsid);
         foreach ($getsessiontitle as $st) {
             $sessiontitle = $st->seriestitle;
-            $savescorm = $DB->execute('UPDATE {local_scormcreator_manifest} SET scorm_name="'.$sessiontitle.$imsid.'" 
-			              WHERE id = ?', [$imsid]);
+            $savescorm = $DB->execute('UPDATE {local_scormcreator_manifest} SET scorm_name="'.$sessiontitle.$imsid.'"
+                          WHERE id = ?', [$imsid]);
             redirect(new moodle_url('/local/scormcreator/dscorm.php'));
         }
-		return $savescorm;		
-	}
+        return $savescorm;
+    }
 }
 
 $publishscorm = new local_scormcreator_publish();
