@@ -20,7 +20,7 @@
     top: 0;
 }
 .able-player {
-    font-family: Arial,Helvetica,sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #262626;
 }
 .able-offscreen {
@@ -28,7 +28,7 @@
     overflow: hidden;
 }
 .able-media-container audio {
-    display: none !important;
+    display: none;
 }
 .able-video
 .able-now-playing {
@@ -51,7 +51,7 @@
     position: absolute;
     font-size: 8em;
     opacity: .5;
-    filter: alpha(opacity = 50);
+    filter: opacity(50%);
     color: #fdfdfd;
     background-color: transparent;
     border: 0;
@@ -62,8 +62,8 @@
     z-index: 6500;
 }
 .able-big-play-button: hover {
-    opacity: 100;
-    filter: alpha(opacity = 100);
+    opacity: 1.0;
+    filter: opacity(100%);
 }
 .able-left-controls,
 .able-right-controls {
@@ -82,17 +82,17 @@
 .able-black-controls,
 .able-black-controls button,
 .able-black-controls label {
-    color: #000 !important;
+    color: #000;
 }
 .able-controller button:hover,
 .able-controller button:focus {
     outline-style: none;
 }
 .able-controller button:hover {
-    outline-color: #8ab839 !important;
+    outline-color: #8ab839;
 }
 .able-controller button:focus {
-    outline-color: #ffbb37 !important;
+    outline-color: #ffbb37;
 }
 .able-status-bar span
 .able-speed {
@@ -152,7 +152,7 @@ div.able-modal-dialog {
     display: none;
     color: #000;
     background-color: #fafafa;
-    box-sizing: content-box !important;
+    box-sizing: content-box;
     z-index: 10000;
 }
 div.able-modal-overlay {
@@ -239,7 +239,7 @@ fieldset.able-prefs-keys div {
 div.able-desc-pref-prompt {
     font-weight: 700;
     font-style: italic;
-    margin-left: 1em !important;
+    margin-left: 1em;
 }
 div.able-prefDescFormat > div {
     margin-left: 1.5em;
@@ -258,7 +258,7 @@ fieldset.able-prefs-captions label {
 fieldset.able-prefs-captions select {
     width: 10em;
     font-size: .9em;
-    border-radius: none;
+    border-radius: 0;
 }
 .able-prefs-form div.able-captions-sample {
     padding: .5em;
@@ -272,7 +272,7 @@ fieldset.able-prefs-captions select {
 .able-prefs-form ul {
     margin-top: 0;
 }
-able-prefs-form-keyboard ul {
+.able-prefs-form-keyboard ul {
     list-style-type: none;
 }
 span.able-modkey-alt,
@@ -324,11 +324,11 @@ span.able-modkey {
 }
 .able-window-toolbar
 .able-button-handler-preferences:hover {
-    outline-color: #8ab839 !important;
+    outline-color: #8ab839;
 }
 .able-window-toolbar
 .able-button-handler-preferences:focus {
-    outline-color: #ffbb37 !important;
+    outline-color: #ffbb37;
 }
 .able-window-toolbar
 .able-popup {
@@ -392,11 +392,11 @@ div.able-chapters-div button {
 }
 div.able-chapters-div li
 .able-current-chapter {
-    background-color: #000 !important;
+    background-color: #000;
 }
 div.able-chapters-div li
 .able-current-chapter button {
-    color: #fff !important;
+    color: #fff;
 }
 div.able-chapters-div li
 .able-focus {
@@ -407,7 +407,7 @@ div.able-chapters-div button:hover,
 div.able-chapters-div button:-moz-focus-inner {
     border: 0;
     outline: 0;
-    color: #fff !important;
+    color: #fff;
 }
 .able-tooltip,
 .able-alert {
@@ -415,7 +415,7 @@ div.able-chapters-div button:-moz-focus-inner {
     padding: 5px 10px;
     border-color: #000;
     border-width: 1px;
-    color: #000 !important;
+    color: #000;
     background-color: #ccc;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -425,7 +425,7 @@ div.able-chapters-div button:-moz-focus-inner {
 .able-alert {
     background-color: #ffc;
     box-shadow: 0 0 16px #262626;
- }
+}
 .able-popup {
     z-index: 9200;
 }
@@ -468,7 +468,7 @@ div.able-chapters-div button:-moz-focus-inner {
     color: #000;
 }
 .able-popup-no-radio > ul > li > input {
-    position: absolute !important;
+    position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
 }
 .able-player
@@ -549,11 +549,11 @@ div.able-chapters-div button:-moz-focus-inner {
 }
 .able-clipped,
 .able-screenreader-alert {
-    position: absolute !important;
+    position: absolute;
     clip: rect(1px, 1px, 1px, 1px);
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 .able-error {
     display: block;
@@ -599,18 +599,19 @@ button svg {
     height: 1em;
     fill: currentColor;
 }
+
 @font-face {
     font-family: able;
-    src: url(../button-icons/fonts/able.eot?dqripi);
-    src: url(../button-icons/fonts/able.eot?dqripi#iefix) format('embedded-opentype'),
-        url(../button-icons/fonts/able.ttf?dqripi) format('truetype'),
-        url(../button-icons/fonts/able.woff?dqripi) format('woff'),
-        url(../button-icons/fonts/able.svg?dqripi#able) format('svg');
-    font-weight:400;
-    font-style:normal;
+    src: url('../button-icons/fonts/able.eot?dqripi');
+    src: url('../button-icons/fonts/able.eot?dqripi#iefix') format('embedded-opentype'),
+         url('../button-icons/fonts/able.ttf?dqripi') format('truetype'),
+         url('../button-icons/fonts/able.woff?dqripi') format('woff'),
+         url('../button-icons/fonts/able.svg?dqripi#able') format('svg');
+    font-weight: 400;
+    font-style: normal;
 }
 [class^=icon-],[class*=" icon-"] {
-    font-family: able !important;
+    font-family: able;
     speak: none;
     font-style: normal;
     font-weight: 400;
