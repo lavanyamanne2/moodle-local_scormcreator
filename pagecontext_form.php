@@ -122,7 +122,7 @@ class local_scormcreator_pagecontext_form extends moodleform {
 
         // Page subtitle.
         $repeatarray[] = $mform->createElement('text', 'pagesubtitle', get_string('pagesubtitleno', 'local_scormcreator'),
-                         array('maxlength' => '1333', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+' ));
+                         array('maxlength' => '1333', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+' ));
         $repeateloptions['pagesubtitle']['disabledif'] = array('limitanswers', 'eq', 0);
         $repeateloptions['pagesubtitle']['rule'] = 'required';
         $repeateloptions['pagesubtitle']['type'] = PARAM_RAW;
