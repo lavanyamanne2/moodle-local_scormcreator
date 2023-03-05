@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 if ($hassiteconfig ) {
     $ADMIN->add('root', new admin_category('scormcreator', get_string('pluginname', 'local_scormcreator')));
     $ADMIN->add('scormcreator', new admin_externalpage('cscorm', get_string('cscorm', 'local_scormcreator'),
-                 new moodle_url('/local/scormcreator/manifest.php')));
+                 new moodle_url('/local/scormcreator/manifest_form.php')));
     $ADMIN->add('scormcreator', new admin_externalpage('dscorm', get_string('dscorm', 'local_scormcreator'),
                  new moodle_url('/local/scormcreator/dscorm.php')));
 }
