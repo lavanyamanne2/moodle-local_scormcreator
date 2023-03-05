@@ -87,7 +87,7 @@ class local_scormcreator_quizcontext_form extends moodleform {
         // Quiz title.
         $mform->addElement('text', 'qtitle', get_string('qtitle', 'local_scormcreator'),
                            array('size' => 40, 'maxlength' => '1333',
-                           'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+'), );
+                           'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+'), );
         $mform->setType('qtitle', PARAM_RAW);
         if (empty($instance->id)) {
             $mform->addRule('qtitle', get_string('required'), 'required', null, 'client');
@@ -119,7 +119,7 @@ class local_scormcreator_quizcontext_form extends moodleform {
 
         // Question text.
         $repeatarray[] = $mform->createElement('text', 'question', get_string('questionno', 'local_scormcreator'),
-                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+' ));
+                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+' ));
         $repeateloptions['question']['rule'] = 'required';
         $repeateloptions['question']['type'] = PARAM_RAW;
         $repeateloptions['question']['helpbutton'] = array('question', 'local_scormcreator');
@@ -128,7 +128,7 @@ class local_scormcreator_quizcontext_form extends moodleform {
 
         // Question correct.
         $repeatarray[] = $mform->createElement('text', 'qcorrect', get_string('qcorrectno', 'local_scormcreator'),
-                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+' ));
+                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+' ));
         $repeateloptions['qcorrect']['rule'] = 'required';
         $repeateloptions['qcorrect']['type'] = PARAM_RAW;
         $repeateloptions['qcorrect']['helpbutton'] = array('qcorrect', 'local_scormcreator');
@@ -137,7 +137,7 @@ class local_scormcreator_quizcontext_form extends moodleform {
 
         // Question incorrect1.
         $repeatarray[] = $mform->createElement('text', 'qincorrect1', get_string('qincorrect1no', 'local_scormcreator'),
-                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+' ));
+                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+' ));
         $repeateloptions['qincorrect1']['rule'] = 'required';
         $repeateloptions['qincorrect1']['type'] = PARAM_RAW;
         $repeateloptions['qincorrect1']['helpbutton'] = array('qincorrect1', 'local_scormcreator');
@@ -146,7 +146,7 @@ class local_scormcreator_quizcontext_form extends moodleform {
 
         // Question incorrect2.
         $repeatarray[] = $mform->createElement('text', 'qincorrect2', get_string('qincorrect2no', 'local_scormcreator'),
-                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+' ));
+                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+' ));
         $repeateloptions['qincorrect2']['disabledif'] = array('questiontype', 'eq', 2);
         $repeateloptions['qincorrect2']['type'] = PARAM_RAW;
         $repeateloptions['qincorrect2']['default'] = null;
@@ -156,7 +156,7 @@ class local_scormcreator_quizcontext_form extends moodleform {
 
         // Question incorrect3.
         $repeatarray[] = $mform->createElement('text', 'qincorrect3', get_string('qincorrect3no', 'local_scormcreator'),
-                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)\-=}({:;>.|<@?/<!&$_ ]+' ));
+                         array('size' => 40, 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+' ));
         $repeateloptions['qincorrect3']['disabledif'] = array('questiontype', 'eq', 2);
         $repeateloptions['qincorrect3']['default'] = null;
         $repeateloptions['qincorrect3']['helpbutton'] = array('qincorrect3', 'local_scormcreator');
