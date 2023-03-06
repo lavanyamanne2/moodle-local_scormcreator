@@ -25,8 +25,6 @@
 require('../../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot.'/mod/page/locallib.php'); // Defines function page_get_editor_options().
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -54,7 +52,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib();
+$scormmaker = new local_scormcreator_scorm_lib();
 
 /**
  * Initialization of editmanifest_form class.
@@ -69,9 +67,6 @@ class local_scormcreator_editmanifest_form extends moodleform {
     public function definition() {
 
         global $DB, $CFG, $PAGE, $context, $imsid, $scormmaker;
-
-        $scormmaker = new local_scormcreator_scormlib();
-
         $mform = $this->_form;
 
         // Form header.
