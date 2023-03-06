@@ -25,7 +25,6 @@
 require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -54,7 +53,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib();
+$scormmaker = new local_scormcreator_scorm_lib();
 
 /**
  *
@@ -67,7 +66,6 @@ function local_scormcreator_cleanscorm($imsid) {
     global $DB, $CFG, $imsid, $dirpath, $scormmaker;
 
     // Calling the function local_scormcreator_deletedir($path) to clean up backend scorm folders.
-    $scormmaker = new local_scormcreator_scormlib();
     $manifest = $scormmaker->local_scormcreator_manifest($imsid);
     foreach ($manifest as $m) {
         $scormname = $m->scorm_name;
