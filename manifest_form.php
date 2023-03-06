@@ -137,7 +137,7 @@ class local_scormcreator_manifest_form extends moodleform {
         $mform->addHelpButton('pagecount', 'pagecount', 'local_scormcreator');
 
         // Logo.
-        $logooptions = array('subdirs' => 0, 'maxbytes' => '', 'context' => $context,
+        $logooptions = array('subdirs' => 0, 'maxbytes' => '', 'maxfiles' => 1, 'context' => $context,
                              'accepted_types' => array('.png'), 'return_types' => FILE_INTERNAL | FILE_EXTERNAL);
         $mform->addElement('filemanager', 'logo', get_string('logo', 'local_scormcreator'), null, $logooptions);
         $mform->addRule('logo', get_string('required', 'local_scormcreator'), 'required', null, 'client');
