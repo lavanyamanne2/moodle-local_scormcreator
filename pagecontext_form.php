@@ -26,8 +26,6 @@ require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir . '/filelib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/lib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -41,7 +39,7 @@ $imsid = required_param('imsid', PARAM_INT);
 
 global $CFG, $USER, $DB, $OUTPUT, $PAGE, $instance, $imsid, $scormmaker;
 
-$PAGE->set_url('/local/scormcreator/pagecontext.php', array('imsid' => $imsid));
+$PAGE->set_url('/local/scormcreator/pagecontext_form.php', array('imsid' => $imsid));
 
 require_login();
 
@@ -55,7 +53,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib();
+$scormmaker = new local_scormcreator_scorm_lib();
 
 /**
  * Initialization of pagecontext_form.
@@ -70,8 +68,6 @@ class local_scormcreator_pagecontext_form extends moodleform {
     public function definition() {
 
         global $DB, $CFG, $PAGE, $imsid, $instance, $contextid, $scormmaker, $context;
-
-        $scormmaker = new local_scormcreator_scormlib();
 
         $mform = $this->_form;
 
@@ -106,8 +102,7 @@ class local_scormcreator_pagecontext_form extends moodleform {
         // Page loop headers.
         $repeatarray = array();
         $repeateloptions = array();
-        $repeatarray[] = $mform->createElement('header', 'pageloopheader',
-                         get_string('pagetitleno', 'local_scormcreator'));
+        $repeatarray[] = $mform->createElement('header', 'pageloopheader', get_string('pagetitleno', 'local_scormcreator'));
         $repeateloptions['pageloopheader']['advanced'] = true;
 
         // Page title.
