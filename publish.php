@@ -25,8 +25,6 @@
 require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/lib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -55,7 +53,7 @@ $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
 // Define the local_scormcreator_scormlib class functions.
-$scormmaker = new local_scormcreator_scormlib();
+$scormmaker = new local_scormcreator_scorm_lib();
 
 /**
  * Initialization of local_scormcreator_scormlib class.
@@ -239,11 +237,11 @@ class local_scormcreator_publish {
                     $pagetoreplace3 = "Page ? of ?";
                     $fp = $pcount + 1;
                     $replacepagewith3 = 'Page '.$x.' of '.$fp.'';
-                    $r3 = $scormmaker->local_scormcreator_replace_string_infile($page, $pagetoreplace3, $replacepagewith3);
+                    $r4 = $scormmaker->local_scormcreator_replace_string_infile($page, $pagetoreplace3, $replacepagewith3);
                 }
             }
         }
-        return array ('r1' => $r1, 'r2' => $r2, 'r3' => $r3);
+        return array ('r1' => $r1, 'r2' => $r2, 'r3' => $r3, 'r4' => $r4);
     }
 
     /**
@@ -574,7 +572,7 @@ class local_scormcreator_publish {
                 }
             }
         }
-        return array('q1' => $q1, 'q2' => q2);
+        return array('q1' => $q1, 'q2' => $q2);
     }
 
     /**
@@ -628,21 +626,21 @@ class local_scormcreator_publish {
     }
 }
 
-$publishscorm = new local_scormcreator_publish();
-$publishscorm->scormtemp($imsid);
-$publishscorm->scormcopy($imsid);
-$publishscorm->scormxml($imsid);
-$publishscorm->scormlaunchpage($imsid);
-$publishscorm->scormtitle($imsid);
-$publishscorm->scormtranscript($imsid);
-$publishscorm->scormmedia($imsid);
-$publishscorm->scormvtt($imsid);
-$publishscorm->scormlogo($imsid);
-$publishscorm->scormquiz_html($imsid);
-$publishscorm->scormquestion_count($imsid);
-$publishscorm->scormquestions($imsid);
-$publishscorm->scormzip($imsid);
-$publishscorm->savescorm($imsid);
+$publish = new local_scormcreator_publish();
+$publish->scormtemp($imsid);
+$publish->scormcopy($imsid);
+$publish->scormxml($imsid);
+$publish->scormlaunchpage($imsid);
+$publish->scormtitle($imsid);
+$publish->scormtranscript($imsid);
+$publish->scormmedia($imsid);
+$publish->scormvtt($imsid);
+$publish->scormlogo($imsid);
+$publish->scormquiz_html($imsid);
+$publish->scormquestion_count($imsid);
+$publish->scormquestions($imsid);
+$publish->scormzip($imsid);
+$publish->savescorm($imsid);
 
 echo $OUTPUT->header();
 echo $OUTPUT->footer();
