@@ -24,7 +24,7 @@
 
 /**
  *
- * The local_scormcreator_pluginfile() function defines the placement of an uploaded file.
+ * The local_scormcreator_lib() function defines the placement of an uploaded file.
  *
  * @param My_Type $course
  * @param My_Type $cm
@@ -34,7 +34,7 @@
  * @param My_Type $forcedownload
  * @param My_Type $options
  */
-function local_scormcreator_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+function local_scormcreator_lib($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     global $DB;
 
     if ($context->contextlevel != CONTEXT_SYSTEM) {
