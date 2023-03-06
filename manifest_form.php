@@ -24,8 +24,6 @@
 require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot.'/mod/page/locallib.php'); // Defines page_get_editor_options().
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -37,7 +35,7 @@ if ($path) {
 
 global $CFG, $USER, $DB, $OUTPUT, $context, $PAGE, $instance;
 
-$PAGE->set_url('/local/scormcreator/manifest.php');
+$PAGE->set_url('/local/scormcreator/manifest_form.php');
 
 require_login();
 
@@ -50,8 +48,6 @@ admin_externalpage_setup('cscorm', '', $pageparams);
 $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
-
-$scormmaker = new local_scormcreator_scormlib();
 
 /**
  * Initialization of manifest_form class.
@@ -66,16 +62,13 @@ class local_scormcreator_manifest_form extends moodleform {
     public function definition() {
 
         global $DB, $CFG, $PAGE, $context, $imsid, $instance;
-
-        $scormmaker = new local_scormcreator_scormlib();
-
         $mform = $this->_form;
 
         // Form header.
         $mform->addElement('header', 'mformheader', get_string('mformheader', 'local_scormcreator'));
 
         /* Series title
-           Rule types: Must not be empty, Characters should not exceed 1333.
+           Rule types: Must not be empty, characters should not exceed 1333.
          */
         $mform->addElement('text', 'seriestitle', get_string('seriestitle', 'local_scormcreator'), array('size' => 40,
                            'maxlength="1333"', 'pattern' => '[A-Za-z0-9-|:~`!@#$%^+&,)-=}({:;>.|<@?/<!&$_ ]+'));
@@ -237,6 +230,7 @@ if ($mform->is_cancelled()) {
         $data->id = $DB->insert_record('local_scormcreator_manifest', $data);
 
         // Save the logo file.
+        $scormmaker = new local_scormcreator_scorm_lib();
         $getlogo = $scormmaker->local_scormcreator_manifest($data->id);
         foreach ($getlogo as $gl) {
             file_save_draft_area_files($gl->logo, $context->id, 'local_scormcreator', 'logo', '0', $logooptions);
