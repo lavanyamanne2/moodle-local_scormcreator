@@ -26,8 +26,6 @@ require('../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->libdir.'/tablelib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/lib.php');
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -55,7 +53,7 @@ $PAGE->set_heading($header);
 
 echo $OUTPUT->header();
 
-$scormmaker = new local_scormcreator_scormlib();
+$scormmaker = new local_scormcreator_scorm_lib();
 
 $scormdata = new flexible_table('tableviewer');
 $scormdata->define_columns(array('Name', 'Time Created', 'Download', ' '));
@@ -63,9 +61,8 @@ $scormdata->define_headers(array('Name', 'Time Created', 'Download', ' '));
 $scormdata->define_baseurl($PAGE->url);
 $scormdata->setup();
 
-$emsid = '';
 $scormtitle = $DB->get_records_sql('SELECT scm.id, scm.template, scm.scorm_name, scm.timemodified
-                                    FROM {local_scormcreator_manifest} scm WHERE scm.scorm_name != ?', [$emsid]);
+                                    FROM {local_scormcreator_manifest} scm');
 foreach ($scormtitle as $st) {
 
     $date = new DateTime();
