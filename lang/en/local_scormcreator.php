@@ -60,7 +60,7 @@ $string['session'] = 'Session ##';
 $string['landingpage'] = 'Landing page';
 $string['landingpage_help'] = 'Landing page is a quick launch of the SCORM package,
                                followed by <b>launch.htm/launch.html/index.htm/index.html</b>';
-$string['landingpagetext'] = 'The launching html file that launches the scorm.';							   
+$string['landingpagetext'] = 'The launching html file that launches the scorm.';
 $string['template'] = 'Template';
 $string['temp_select'] = 'Select template';
 $string['temp_bluemint'] = 'Bluemint';
