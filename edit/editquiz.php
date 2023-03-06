@@ -25,8 +25,7 @@
 require('../../../config.php');
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->libdir.'/adminlib.php');
-require_once($CFG->dirroot.'/mod/page/locallib.php'); // Defines function page_get_editor_options().
-require_once($CFG->dirroot . '/local/scormcreator/classes/locallib.php');
+require_once($CFG->dirroot.'/mod/page/locallib.php');
 
 $instance = optional_param('id', 0, PARAM_INT);
 $path = optional_param('path', '', PARAM_PATH);
@@ -38,7 +37,7 @@ if ($path) {
 
 $imsid = required_param('imsid', PARAM_INT);
 
-global $CFG, $USER, $DB, $OUTPUT, $PAGE, $instance, $imsid, $scormmaker;
+global $CFG, $USER, $DB, $OUTPUT, $PAGE, $instance, $imsid;
 
 $PAGE->set_url('/local/scormcreator/editquiz.php', array('imsid' => $imsid));
 
@@ -54,7 +53,7 @@ $header = $SITE->fullname;
 $PAGE->set_title(get_string('pluginname', 'local_scormcreator'));
 $PAGE->set_heading($header);
 
-$scormmaker = new local_scormcreator_scormlib();
+$scormmaker = new local_scormcreator_scorm_lib();
 
 /**
  * Initialization of editquiz_form class.
@@ -69,9 +68,6 @@ class local_scormcreator_editquiz_form extends moodleform {
     public function definition() {
 
         global $DB, $CFG, $PAGE, $context, $imsid, $instance, $scormmaker;
-
-        $scormmaker = new local_scormcreator_scormlib();
-
         $mform = $this->_form;
 
         // Get quizoptions.
