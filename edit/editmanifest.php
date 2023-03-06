@@ -147,7 +147,7 @@ class local_scormcreator_editmanifest_form extends moodleform {
         $mform->setDefault('pagecount', $m->pagecount);
 
         // Logo.
-        $logooptions = array('subdirs' => 0, 'maxbytes' => '', 'context' => $context,
+        $logooptions = array('subdirs' => 0, 'maxbytes' => '', 'maxfiles' => 1, 'context' => $context,
                              'accepted_types' => array('.png', '.jpg'),
                              'return_types' => FILE_INTERNAL | FILE_EXTERNAL);
         $mform->addElement('filemanager', 'logo', get_string('logo', 'local_scormcreator'), null, $logooptions);
