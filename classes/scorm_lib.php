@@ -30,7 +30,7 @@ require_login();
 /**
  * Initialization of local_scormcreator_scormlib class.
  */
-class local_scormcreator_scormlib {
+class local_scormcreator_scorm_lib {
 
     /**
      *
